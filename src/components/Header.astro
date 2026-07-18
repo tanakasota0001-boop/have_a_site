@@ -38,7 +38,7 @@ import siteData from '../data/site-data.json';
     <!-- モバイルメニュー開閉ボタン -->
     <button 
       id="mobile-menu-toggle" 
-      class="lg:hidden flex flex-col justify-center items-center w-10 h-10 border border-ink bg-paper rounded focus:outline-none z-50"
+      class="lg:hidden flex flex-col justify-center items-center w-11 h-11 border-2 border-ink bg-paper rounded focus:outline-none z-50"
       aria-label="メニューを開閉する"
       aria-expanded="false"
       aria-controls="mobile-nav"
@@ -48,6 +48,13 @@ import siteData from '../data/site-data.json';
       <span class="w-6 h-[2px] bg-ink transition-transform duration-300 my-[3px]" id="bar-3"></span>
     </button>
   </div>
+
+  <!-- モバイルメニュー背景オーバーレイ -->
+  <div 
+    id="mobile-menu-overlay" 
+    class="fixed inset-0 bg-ink/40 backdrop-blur-sm z-30 opacity-0 pointer-events-none transition-opacity duration-300"
+    aria-hidden="true"
+  ></div>
 
   <!-- モバイル ナビゲーション ドロワー -->
   <nav 
@@ -99,6 +106,7 @@ import siteData from '../data/site-data.json';
   // モバイルメニューのトグル
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const mobileNav = document.getElementById('mobile-nav');
+  const overlay = document.getElementById('mobile-menu-overlay');
   const bar1 = document.getElementById('bar-1');
   const bar2 = document.getElementById('bar-2');
   const bar3 = document.getElementById('bar-3');
@@ -108,28 +116,53 @@ import siteData from '../data/site-data.json';
 
   function toggleMenu() {
     isOpen = !isOpen;
-    if (toggleBtn && mobileNav && bar1 && bar2 && bar3) {
+    if (toggleBtn && mobileNav && overlay && bar1 && bar2 && bar3) {
       toggleBtn.setAttribute('aria-expanded', String(isOpen));
       mobileNav.setAttribute('aria-hidden', String(!isOpen));
       
       if (isOpen) {
         mobileNav.classList.remove('translate-x-full');
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+        overlay.classList.add('opacity-100');
         bar1.classList.add('rotate-45', 'translate-y-[8px]');
         bar2.classList.add('opacity-0');
         bar3.classList.add('-rotate-45', '-translate-y-[8px]');
         document.body.style.overflow = 'hidden';
+        
+        // Lenisスクロールを停止
+        // @ts-ignore
+        if (window.lenisInstance) {
+          // @ts-ignore
+          window.lenisInstance.stop();
+        }
       } else {
         mobileNav.classList.add('translate-x-full');
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0', 'pointer-events-none');
         bar1.classList.remove('rotate-45', 'translate-y-[8px]');
         bar2.classList.remove('opacity-0');
         bar3.classList.remove('-rotate-45', '-translate-y-[8px]');
         document.body.style.overflow = '';
+        
+        // Lenisスクロールを再開
+        // @ts-ignore
+        if (window.lenisInstance) {
+          // @ts-ignore
+          window.lenisInstance.start();
+        }
       }
     }
   }
 
   if (toggleBtn) {
     toggleBtn.addEventListener('click', toggleMenu);
+  }
+
+  // オーバーレイクリック時に閉じる
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      if (isOpen) toggleMenu();
+    });
   }
 
   // リンククリック時に閉じる

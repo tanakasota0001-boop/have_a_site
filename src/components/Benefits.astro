@@ -27,7 +27,7 @@ const sortedBenefits = benefits.sort((a, b) => a.data.sortOrder - b.data.sortOrd
         {sortedBenefits.map((benefit, index) => {
           const badgeBg = index % 2 === 0 ? "bg-accent text-ink" : "bg-terracotta text-paper";
           return (
-            <div class="benefit-item relative p-8 md:p-10 border-2 border-ink bg-paper shadow-[6px_6px_0px_#1c1c1c] rounded-sm transition-all duration-300 hover:shadow-[2px_2px_0px_#1c1c1c] hover:translate-x-[4px] hover:translate-y-[4px] benefits-card-grid">
+            <div class="benefit-item relative p-6 sm:p-8 md:p-10 border-2 border-ink bg-paper shadow-[6px_6px_0px_#1c1c1c] rounded-sm transition-all duration-300 hover:shadow-[2px_2px_0px_#1c1c1c] hover:translate-x-[4px] hover:translate-y-[4px] benefits-card-grid">
               <!-- インデックスフォルダ風のタブバッジ -->
               <div class={`absolute -top-[30px] left-6 border-2 border-b-0 border-ink font-hand text-base md:text-lg font-bold px-4 py-0.5 rounded-t-md ${badgeBg} shadow-[1px_0px_0px_rgba(0,0,0,0.05)]`}>
                 Benefit 0{index + 1}

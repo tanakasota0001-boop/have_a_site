@@ -40,7 +40,7 @@ const sortedIncludes = pricingIncludes.sort(
     >
       <!-- 左：主要料金 (初期費用0円＆月額料金) (7カラム) -->
       <div
-        class="lg:col-span-7 border-2 border-ink bg-paper p-8 md:p-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-between relative pricing-card"
+        class="lg:col-span-7 border-2 border-ink bg-paper p-6 sm:p-8 md:p-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-between relative pricing-card"
       >
         <!-- バッジ -->
         <span
@@ -116,9 +116,8 @@ const sortedIncludes = pricingIncludes.sort(
         <!-- 右上：月額料金に含まれるもの - 吹き出しデザイン (サイズをコンパクトにし、popな黄色背景へ、傾きなし) -->
         <div
           class="border-2 border-ink bg-[#FEF8E7] px-6 py-8 md:px-7 md:py-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-start relative pricing-card
-          before:content-[''] before:absolute before:z-10
-          before:top-0 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-4 before:h-4 before:bg-[#FEF8E7] before:border-t-2 before:border-l-2 before:border-ink before:rotate-45
-          lg:before:top-[178px] lg:before:left-0 lg:before:-translate-x-1/2 lg:before:translate-y-0 lg:before:border-t-0 lg:before:border-r-0 lg:before:border-l-2 lg:before:border-b-2 lg:before:bg-[#FEF8E7]"
+          lg:before:content-[''] lg:before:absolute lg:before:z-10
+          lg:before:top-[178px] lg:before:left-0 lg:before:-translate-x-1/2 lg:before:w-4 lg:before:h-4 lg:before:bg-[#FEF8E7] lg:before:border-l-2 lg:before:border-b-2 lg:before:border-ink lg:before:rotate-45"
         >
           <div class="space-y-4">
             <h3

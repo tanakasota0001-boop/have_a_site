@@ -47,7 +47,7 @@ const problems = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto" id="problems-grid">
       {problems.map((prob) => (
         <div 
-          class={`problem-sticky p-6 border-2 border-ink ${prob.bg} ${prob.rotation} shadow-[4px_4px_0px_#1c1c1c] transition-transform duration-300 hover:rotate-0 flex flex-col justify-between aspect-[1.4/1] relative`}
+          class={`problem-sticky p-6 border-2 border-ink ${prob.bg} ${prob.rotation} shadow-[4px_4px_0px_#1c1c1c] transition-transform duration-300 hover:rotate-0 flex flex-col justify-between aspect-auto min-h-[160px] sm:aspect-[1.4/1] relative`}
           id={prob.id}
         >
           <!-- 角のテープ風装飾（エディトリアル） -->
