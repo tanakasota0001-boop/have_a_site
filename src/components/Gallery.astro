@@ -1,0 +1,124 @@
+---
+import works from '../data/works.json';
+
+const sortedWorks = works.sort((a, b) => a.sortOrder - b.sortOrder);
+---
+
+<section id="gallery" class="py-24 bg-[#E2D8C3] border-b border-ink relative overflow-hidden paper-texture">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    
+    <!-- セクション見出し -->
+    <div class="mb-16 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-ink/10 pb-8">
+      <div class="space-y-2">
+        <span class="font-hand text-2xl text-terracotta block">Portfolio</span>
+        <h2 class="font-serif font-extrabold text-3xl md:text-4xl text-ink">
+          制作実績
+        </h2>
+      </div>
+    </div>
+
+    <!-- 実績カードグリッド -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16" id="gallery-grid">
+      {sortedWorks.map((work, index) => {
+        const screenshotPC = work.image;
+        
+        return (
+          <div 
+            class="gallery-card flex flex-col gap-6 group"
+            data-category={work.category}
+            data-index={index}
+          >
+            <!-- PCモックアップエリア -->
+            <div class="relative w-full bg-ink/5 border-2 border-ink rounded-lg shadow-[6px_6px_0px_#1c1c1c] overflow-hidden shrink-0">
+              <!-- ブラウザ風ヘッダー -->
+              <div class="h-8 border-b-2 border-ink bg-paper flex items-center px-4 gap-1.5 shrink-0 select-none">
+                <div class="flex gap-1">
+                  <div class="w-2.5 h-2.5 rounded-full bg-ink/30"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-ink/30"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-ink/30"></div>
+                </div>
+                <div class="mx-auto bg-ink/5 text-[10px] text-ink-light py-0.5 px-6 sm:px-12 rounded border border-ink/10 truncate max-w-[60%] font-mono">
+                  {work.url}
+                </div>
+              </div>
+              
+              <!-- PCスクリーンショットエリア（ファーストビュー比率 16:9 を再現） -->
+              <div class="relative w-full aspect-video overflow-hidden bg-ink/5">
+                <img 
+                  src={screenshotPC} 
+                  alt={`${work.title} プレビュー`}
+                  class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-102"
+                  loading="lazy"
+                />
+                
+                <!-- URLへの直接ホバー導線 -->
+                <a 
+                  href={work.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="absolute inset-0 bg-ink/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300 backdrop-blur-xs"
+                  aria-label={`${work.title}のデモサイトを見る`}
+                >
+                  <span class="bg-paper text-ink font-sans font-bold text-xs sm:text-sm px-4 py-2 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none">
+                    サイトを見る <span class="inline-block ml-1 font-mono">→</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <!-- サムネイル下部の店名と業種バッジ -->
+            <div class="px-0.5 flex flex-row items-center justify-between gap-x-4 gap-y-2 w-full">
+              <h3 class="font-serif font-extrabold text-base sm:text-lg text-ink">
+                {work.title}
+              </h3>
+              {work.category && (
+                <span class="inline-block px-2.5 py-0.5 border border-ink text-[10px] sm:text-[11px] font-sans font-bold tracking-widest bg-terracotta text-paper shadow-[2px_2px_0px_#1c1c1c] select-none shrink-0">
+                  {work.category}
+                </span>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // 1. 初回読み込み時のGSAPスクロールアニメーション
+  const grid = document.getElementById('gallery-grid');
+
+  if (grid) {
+    const observer = new IntersectionObserver(async (entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        observer.unobserve(grid);
+
+        try {
+          const { default: gsap } = await import('gsap');
+          
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            gsap.from('.gallery-card', {
+              opacity: 0,
+              y: 60,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: 'power3.out',
+              onStart: function() {
+                gsap.set('.gallery-card', { transition: 'none' });
+              },
+              onComplete: function() {
+                gsap.set('.gallery-card', { clearProps: "transition,opacity,transform" });
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Failed to load GSAP in Gallery section:', error);
+        }
+      }
+    }, { rootMargin: '100px' });
+
+    observer.observe(grid);
+  }
+</script>

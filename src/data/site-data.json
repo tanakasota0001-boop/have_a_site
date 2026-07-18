@@ -21,10 +21,6 @@
   },
   "navigation": [
     {
-      "label": "特徴",
-      "url": "#summary"
-    },
-    {
       "label": "お悩み",
       "url": "#problems"
     },

@@ -38,7 +38,6 @@
 │   ├── components/            # LPの各セクションコンポーネント
 │   │   ├── Header.astro       # ヘッダー（モバイルメニュー＆CTA含む）
 │   │   ├── Hero.astro         # ファーストビュー（LCP考慮）
-│   │   ├── Summary.astro      # 特徴要約（アシンメトリーTOC風）
 │   │   ├── Problems.astro     # お悩み（手書き付箋風）
 │   │   ├── System.astro       # 仕組み（無料サンプル図解）
 │   │   ├── Reasons.astro      # 選ばれる理由（アシンメトリー段違い）
