@@ -5,44 +5,78 @@ import siteData from '../data/site-data.json';
 interface Props {
   title?: string;
   description?: string;
+  schema?: Record<string, any> | Record<string, any>[];
 }
 
 const { 
   title = siteData.site.title, 
-  description = siteData.site.description 
+  description = siteData.site.description,
+  schema
 } = Astro.props;
 
-// JSON-LD 構造化データ
-const jsonLd = {
+// WebSite 構造化データ
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "塩尻市・松本市のHP制作屋さん HaveASite",
+  "url": siteData.site.url
+};
+
+// ProfessionalService 構造化データ
+const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "塩尻市・松本市のHP制作屋さん",
+  "name": "塩尻市・松本市のHP制作屋さん HaveASite",
   "description": description,
   "url": siteData.site.url,
+  "image": `${siteData.site.url}/assets/pop_handdrawn_browser.png`,
+  "telephone": siteData.company.phone,
+  "openingHours": siteData.company.openingHours,
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": siteData.company.geo.latitude,
+    "longitude": siteData.company.geo.longitude
+  },
   "address": {
     "@type": "PostalAddress",
-    "addressRegion": "長野県",
-    "addressLocality": "塩尻市・松本市",
+    "postalCode": siteData.company.address.postalCode,
+    "addressRegion": siteData.company.address.addressRegion,
+    "addressLocality": siteData.company.address.addressLocality,
+    "streetAddress": siteData.company.address.streetAddress,
     "addressCountry": "JP"
   },
   "priceRange": "¥5000~",
   "areaServed": [
-    {
-      "@type": "AdministrativeArea",
-      "name": "塩尻市"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "松本市"
-    }
+    { "@type": "AdministrativeArea", "name": "塩尻市" },
+    { "@type": "AdministrativeArea", "name": "松本市" },
+    { "@type": "AdministrativeArea", "name": "安曇野市" },
+    { "@type": "AdministrativeArea", "name": "岡谷市" },
+    { "@type": "AdministrativeArea", "name": "諏訪市" },
+    { "@type": "AdministrativeArea", "name": "山形村" },
+    { "@type": "AdministrativeArea", "name": "朝日村" }
   ],
   "offers": {
     "@type": "Offer",
-    "price": "3000",
+    "price": siteData.pricing.basePrice.replace(/,/g, ''),
     "priceCurrency": "JPY",
-    "description": "初期費用0円、月額3,000円からのホームページ制作・運用保守プラン"
-  }
+    "description": `初期費用0円、月額${siteData.pricing.basePrice}円からのホームページ制作・運用保守プラン`
+  },
+  "sameAs": [
+    siteData.contact.lineUrl,
+    siteData.contact.instagramUrl,
+    siteData.contact.xUrl
+  ]
 };
+
+// 全構造化データを配列に格納
+const schemas = [websiteSchema, serviceSchema];
+if (schema) {
+  if (Array.isArray(schema)) {
+    schemas.push(...schema);
+  } else {
+    schemas.push(schema);
+  }
+}
 ---
 
 <!doctype html>
@@ -67,13 +101,19 @@ const jsonLd = {
     <meta property="og:site_name" content="塩尻市・松本市のHP制作屋さん" />
     <meta name="twitter:card" content="summary_large_image" />
     
-    <!-- Google Fonts Preconnect and Load -->
+    <!-- Google Fonts Preconnect and Load (Preloaded & Optimized) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;700;900&family=Shippori+Mincho:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Yusei+Magic&family=Kiwi+Maru:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;700;900&family=Shippori+Mincho:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Yusei+Magic&family=Kiwi+Maru:wght@500;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;700;900&family=Shippori+Mincho:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Yusei+Magic&family=Kiwi+Maru:wght@500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;700;900&family=Shippori+Mincho:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Yusei+Magic&family=Kiwi+Maru:wght@500;700&display=swap" rel="stylesheet" />
+    </noscript>
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {schemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
   </head>
   <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden selection:bg-terracotta/20 selection:text-terracotta">
     <!-- Skip to content link for accessibility -->

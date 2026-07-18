@@ -9,10 +9,24 @@
     "lineUrl": "https://lin.ee/TNxjtDt",
     "lineQrCode": "/assets/line-qr.png",
     "lineAccountName": "HaveASite.",
-    "formSubmitUrl": "https://formsubmit.co/have.a.site01@gmail.com"
+    "formSubmitUrl": "https://formsubmit.co/have.a.site01@gmail.com",
+    "instagramUrl": "https://www.instagram.com/have_a_site/",
+    "xUrl": "https://x.com/have_a_site"
   },
   "company": {
-    "name": "HaveASite."
+    "name": "HaveASite.",
+    "phone": "090-6483-3331",
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "geo": {
+      "latitude": "36.1147",
+      "longitude": "137.9535"
+    },
+    "address": {
+      "postalCode": "399-0737",
+      "addressRegion": "長野県",
+      "addressLocality": "塩尻市",
+      "streetAddress": "大門八番町"
+    }
   },
   "pricing": {
     "basePrice": "5,000",

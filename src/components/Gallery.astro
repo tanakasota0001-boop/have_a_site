@@ -1,7 +1,21 @@
 ---
+import { Image } from 'astro:assets';
 import works from '../data/works.json';
 
 const sortedWorks = works.sort((a, b) => a.sortOrder - b.sortOrder);
+
+// src/assets/works から画像を動的にインポートするための glob マップ
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/works/*.{jpeg,jpg,png,gif,webp}');
+
+// 画像データを非同期で解決
+const worksWithImages = await Promise.all(
+  sortedWorks.map(async (work) => {
+    const filename = work.image.split('/').pop();
+    const imageImport = images[`../assets/works/${filename}`];
+    const image = imageImport ? (await imageImport()).default : null;
+    return { ...work, image };
+  })
+);
 ---
 
 <section id="gallery" class="py-24 bg-[#E2D8C3] border-b border-ink relative overflow-hidden paper-texture">
@@ -19,9 +33,7 @@ const sortedWorks = works.sort((a, b) => a.sortOrder - b.sortOrder);
 
     <!-- 実績カードグリッド -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16" id="gallery-grid">
-      {sortedWorks.map((work, index) => {
-        const screenshotPC = work.image;
-        
+      {worksWithImages.map((work, index) => {
         return (
           <div 
             class="gallery-card flex flex-col gap-6 group"
@@ -44,12 +56,20 @@ const sortedWorks = works.sort((a, b) => a.sortOrder - b.sortOrder);
               
               <!-- PCスクリーンショットエリア（ファーストビュー比率 16:9 を再現） -->
               <div class="relative w-full aspect-video overflow-hidden bg-ink/5">
-                <img 
-                  src={screenshotPC} 
-                  alt={`${work.title} プレビュー`}
-                  class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-102"
-                  loading="lazy"
-                />
+                {work.image ? (
+                  <Image 
+                    src={work.image} 
+                    alt={`${work.title} プレビュー`}
+                    width={640}
+                    height={360}
+                    class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-102"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-full bg-ink/10 flex items-center justify-center text-xs text-ink-light">
+                    No Image
+                  </div>
+                )}
                 
                 <!-- URLへの直接ホバー導線 -->
                 <a 

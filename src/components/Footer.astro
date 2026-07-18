@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import siteData from "../data/site-data.json";
+import logoImage from "../assets/logo.png";
 ---
 
 <footer class="bg-ink text-paper pt-16 pb-12 border-t-2 border-ink">
@@ -13,8 +15,8 @@ import siteData from "../data/site-data.json";
         class="inline-block group focus:outline-none"
         aria-label="HaveASite."
       >
-        <img
-          src="/assets/logo.png"
+        <Image
+          src={logoImage}
           alt="HaveASite."
           class="h-7 md:h-8 w-auto object-contain invert hue-rotate-180"
         />
