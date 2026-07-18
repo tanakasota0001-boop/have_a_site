@@ -1,6 +1,5 @@
 ---
 // Hero.astro (外枠を完全に排除し、画像自体にホバーアニメーションを直接適用して空白を完全解消したFV)
-import { Image } from 'astro:assets';
 import heroIllustration from '../assets/pop_handdrawn_browser.png';
 import bgImage from '../assets/acrylic_art_bg.png';
 ---
@@ -102,14 +101,16 @@ import bgImage from '../assets/acrylic_art_bg.png';
 
       <!-- 右：イラストコンテンツ (5カラム、外枠コンテナを完全に排除し、画像自体がホバー時に拡大・移動するように直接定義) -->
       <div class="lg:col-span-5 flex justify-center lg:justify-end z-10">
-        <Image
-          src={heroIllustration}
+        <img
+          src={heroIllustration.src}
           alt="手書き風のポップで可愛いブラウザ型ホームページイラスト"
-          width={560}
+          width="560"
+          height="560"
           loading="eager"
           fetchpriority="high"
           class="w-full max-w-[440px] md:max-w-[530px] lg:max-w-[560px] h-auto transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 cursor-pointer select-none"
           id="hero-illustration-card"
+          decoding="async"
         />
       </div>
     </div>

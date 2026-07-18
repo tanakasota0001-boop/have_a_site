@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import siteData from "../data/site-data.json";
 import lineQrCode from "../assets/line-qr.png";
 ---
@@ -232,13 +231,14 @@ import lineQrCode from "../assets/line-qr.png";
             <div
               class="w-28 h-28 border-2 border-ink bg-paper p-1.5 shadow-[4px_4px_0px_#1c1c1c]"
             >
-              <Image
-                src={lineQrCode}
+              <img
+                src={lineQrCode.src}
                 alt={`${siteData.contact.lineAccountName} 公式LINE QRコード`}
-                width={112}
-                height={112}
+                width="112"
+                height="112"
                 class="w-full h-full object-contain"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

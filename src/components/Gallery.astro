@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import works from '../data/works.json';
 
 const sortedWorks = works.sort((a, b) => a.sortOrder - b.sortOrder);
@@ -57,13 +56,14 @@ const worksWithImages = await Promise.all(
               <!-- PCスクリーンショットエリア（ファーストビュー比率 16:9 を再現） -->
               <div class="relative w-full aspect-video overflow-hidden bg-ink/5">
                 {work.image ? (
-                  <Image 
-                    src={work.image} 
+                  <img 
+                    src={work.image.src} 
                     alt={`${work.title} プレビュー`}
-                    width={640}
-                    height={360}
+                    width="640"
+                    height="360"
                     class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-102"
                     loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <div class="w-full h-full bg-ink/10 flex items-center justify-center text-xs text-ink-light">

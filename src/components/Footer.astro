@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import siteData from "../data/site-data.json";
 import logoImage from "../assets/logo.png";
 ---
@@ -15,11 +14,14 @@ import logoImage from "../assets/logo.png";
         class="inline-block group focus:outline-none"
         aria-label="HaveASite."
       >
-        <Image
-          src={logoImage}
+        <img
+          src={logoImage.src}
           alt="HaveASite."
-          width={120}
+          width="120"
+          height="22"
           class="h-7 md:h-8 w-auto object-contain invert hue-rotate-180"
+          loading="lazy"
+          decoding="async"
         />
       </a>
       <p class="text-xs text-paper/60 tracking-widest font-serif leading-relaxed pt-1">
