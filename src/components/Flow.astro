@@ -24,7 +24,7 @@ const sortedFlowSteps = flowSteps.sort(
 
     <!-- ステップリスト (横並び) -->
     <div
-      class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-8 relative"
+      class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 relative"
       id="flow-steps-container"
     >
       {
@@ -77,7 +77,7 @@ const sortedFlowSteps = flowSteps.sort(
 
               {/* モバイル用：ステップ間の下向き矢印コネクタ */}
               {index < sortedFlowSteps.length - 1 && (
-                <div class="md:hidden flex justify-center relative z-10 mt-8 mb-2 text-terracotta/40">
+                <div class="md:hidden flex justify-center relative z-10 mt-10 mb-4 text-terracotta/40">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="w-6 h-6 animate-bounce"
