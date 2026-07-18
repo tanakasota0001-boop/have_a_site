@@ -71,7 +71,13 @@ const sortedFaqs = faqs.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
               y: 30,
               duration: 0.6,
               stagger: 0.1,
-              ease: 'power2.out'
+              ease: 'power2.out',
+              onStart: function() {
+                gsap.set('.faq-item', { transition: 'none' });
+              },
+              onComplete: function() {
+                gsap.set('.faq-item', { clearProps: "transition,opacity,transform" });
+              }
             });
           }
         } catch (error) {
