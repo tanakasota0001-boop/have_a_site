@@ -1,0 +1,224 @@
+---
+import { getCollection } from "astro:content";
+import siteData from "../data/site-data.json";
+
+const pricingIncludes = await getCollection("pricing-includes");
+const sortedIncludes = pricingIncludes.sort(
+  (a, b) => a.data.sortOrder - b.data.sortOrder,
+);
+---
+
+<section
+  id="pricing"
+  class="py-24 bg-paper border-b border-ink relative overflow-hidden paper-texture"
+>
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <!-- セクション見出し -->
+    <div class="text-center space-y-4 mb-20">
+      <span class="font-hand text-3xl text-terracotta block"
+        >Simple Pricing</span
+      >
+      <h2
+        class="font-serif font-extrabold text-3xl md:text-4xl text-ink leading-tight"
+      >
+        費用について
+      </h2>
+      <p
+        class="font-serif font-bold text-lg text-ink-light max-w-xl mx-auto leading-relaxed pt-2"
+      >
+        ホームページ制作に、費用はあまりかけられない。<br
+          class="hidden sm:inline"
+        />
+        そんな方こそ、ご相談ください。
+      </p>
+    </div>
+
+    <!-- 料金ブロック (雑誌の価格表・広告風のボールドデザイン) -->
+    <div
+      class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-stretch max-w-5xl mx-auto mb-16"
+      id="pricing-container"
+    >
+      <!-- 左：主要料金 (初期費用0円＆月額料金) (7カラム) -->
+      <div
+        class="lg:col-span-7 border-2 border-ink bg-paper p-8 md:p-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-between relative pricing-card"
+      >
+        <!-- バッジ -->
+        <span
+          class="absolute top-[-15px] left-6 font-serif font-bold text-xs tracking-wider px-3 py-1 border-2 border-ink bg-accent text-ink shadow-[2px_2px_0px_#1c1c1c]"
+        >
+          料金プラン
+        </span>
+
+        <div class="space-y-8 pt-4">
+          <!-- 初期費用0円 -->
+          <div
+            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-ink/10 pb-6"
+          >
+            <div class="space-y-1">
+              <h3 class="font-serif font-extrabold text-xl text-ink">
+                初期費用
+              </h3>
+              <p class="text-xs text-ink-light font-sans">
+                最初にまとまった費用をご用意いただく必要はありません。
+              </p>
+            </div>
+            <div class="flex items-baseline gap-0.5 shrink-0 whitespace-nowrap">
+              <span
+                class="font-serif font-extrabold text-6xl text-terracotta leading-none"
+                >0</span
+              >
+              <span class="font-serif font-bold text-2xl text-terracotta"
+                >円</span
+              >
+            </div>
+          </div>
+
+          <!-- 月額5,000円から -->
+          <div class="flex flex-col border-b border-ink/10 pb-6">
+            <div class="space-y-1">
+              <h3 class="font-serif font-extrabold text-xl text-ink">
+                月額料金
+              </h3>
+              <p class="text-xs text-ink-light font-sans">
+                サイトの内容や更新の頻度、サポート内容によって変わります。
+              </p>
+            </div>
+            <div class="flex flex-col items-end self-end mt-4">
+              <div class="flex items-baseline gap-0.5 shrink-0 whitespace-nowrap">
+                <span class="font-serif font-extrabold text-5xl text-ink leading-none">{siteData.pricing.basePrice}</span>
+                <span class="font-serif font-bold text-xl text-ink">円〜</span>
+              </div>
+              <span class="font-serif font-bold text-xs text-ink-light mt-1">（税込）</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 text-xs text-ink-light/80 bg-paper-texture p-4 border border-ink/10 font-sans leading-relaxed"
+        >
+          <strong>※料金に関するご確認事項：</strong><br />
+          {siteData.pricing.extraFeesClarification}
+        </div>
+
+        <!-- 最終CTAへの誘導 -->
+        <div class="mt-8">
+          <a
+            href="#contact"
+            class="block w-full text-center bg-ink text-paper font-serif font-bold text-xs tracking-widest py-4 hover:bg-terracotta hover:text-paper transition-colors duration-300 border border-ink"
+          >
+            ▶ あなたのケースでの料金を確認する
+          </a>
+        </div>
+      </div>
+
+      <!-- 右カラム：吹き出し ＆ COLUMN (5カラム) -->
+      <div class="lg:col-span-5 flex flex-col justify-between gap-8 lg:gap-0">
+        <!-- 右上：月額料金に含まれるもの - 吹き出しデザイン (サイズをコンパクトにし、popな黄色背景へ、傾きなし) -->
+        <div
+          class="border-2 border-ink bg-[#FEF8E7] px-6 py-8 md:px-7 md:py-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-start relative pricing-card
+          before:content-[''] before:absolute before:z-10
+          before:top-0 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-4 before:h-4 before:bg-[#FEF8E7] before:border-t-2 before:border-l-2 before:border-ink before:rotate-45
+          lg:before:top-[178px] lg:before:left-0 lg:before:-translate-x-1/2 lg:before:translate-y-0 lg:before:border-t-0 lg:before:border-r-0 lg:before:border-l-2 lg:before:border-b-2 lg:before:bg-[#FEF8E7]"
+        >
+          <div class="space-y-4">
+            <h3
+              class="font-serif font-extrabold text-lg text-ink border-b-2 border-ink pb-2"
+            >
+              月額に含まれる内容
+            </h3>
+            <p class="text-xs text-ink-light font-sans leading-relaxed">
+              ホームページの基本的な維持・更新に必要なすべてのサービスが、上記月額プランに内包されています。
+            </p>
+
+            <!-- 手書き風チェックマーク付きリスト -->
+            <ul class="space-y-2.5 pt-1">
+              {
+                sortedIncludes.map((item) => (
+                  <li class="flex items-center gap-3">
+                    <span class="w-5 h-5 rounded-full border border-ink flex items-center justify-center font-bold text-terracotta shrink-0 text-xs animate-pulse">
+                      ✓
+                    </span>
+                    <h4 class="font-serif font-bold text-sm text-ink">
+                      {item.data.title}
+                    </h4>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <!-- 右下：なぜ、この価格で提供できるのか（コラム枠） -->
+        <div
+          class="p-6 border-2 border-dashed border-ink bg-paper relative shadow-[4px_4px_0px_#1c1c1c]"
+          id="why-pricing-box"
+        >
+          <div
+            class="absolute top-[-14px] left-6 bg-paper px-3 font-serif font-bold text-xs tracking-widest text-terracotta uppercase"
+          >
+            COLUMN
+          </div>
+
+          <div class="space-y-3 text-center md:text-left">
+            <h3 class="font-serif font-extrabold text-lg md:text-xl text-ink">
+              なぜ、この価格で提供できるのか
+            </h3>
+            <p
+              class="text-xs md:text-sm text-ink-light leading-relaxed font-sans"
+            >
+              小規模事業者向けにサービス内容を最適化し、制作から運用までを効率化することで、無理のない価格で提供しています。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // GSAPによるスクロールフェードイン
+  const pricingContainer = document.getElementById("pricing-container");
+  const whyPricingBox = document.getElementById("why-pricing-box");
+
+  if (pricingContainer) {
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          observer.unobserve(pricingContainer);
+
+          try {
+            const { default: gsap } = await import("gsap");
+
+            if (
+              !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ) {
+              gsap.from(".pricing-card", {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                stagger: 0.25,
+                ease: "power3.out",
+              });
+
+              if (whyPricingBox) {
+                gsap.from(whyPricingBox, {
+                  opacity: 0,
+                  y: 30,
+                  duration: 1,
+                  delay: 0.5,
+                  ease: "power2.out",
+                });
+              }
+            }
+          } catch (error) {
+            console.error("Failed to load GSAP in Pricing section:", error);
+          }
+        }
+      },
+      { rootMargin: "100px" },
+    );
+
+    observer.observe(pricingContainer);
+  }
+</script>

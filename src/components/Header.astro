@@ -1,0 +1,141 @@
+---
+import siteData from '../data/site-data.json';
+---
+
+<header id="site-header" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+    <!-- ロゴ (HaveASite.) -->
+    <a href="#" class="group flex items-center focus:outline-none" aria-label="HaveASite. ホーム">
+      <img 
+        src="/assets/logo.png" 
+        alt="HaveASite." 
+        class="h-8 md:h-10 w-auto object-contain" 
+      />
+    </a>
+
+    <!-- デスクトップ ナビゲーション -->
+    <nav class="hidden lg:flex items-center space-x-8" aria-label="デスクトップナビゲーション">
+      <ul class="flex items-center space-x-6">
+        {siteData.navigation.map((item) => (
+          <li>
+            <a 
+              href={item.url} 
+              class="font-serif font-bold text-sm text-ink hover:text-terracotta transition-colors duration-200 py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:height-[1px] after:bg-terracotta hover:after:w-full after:transition-all after:duration-300"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a 
+        href="#contact" 
+        class="bg-terracotta text-paper font-serif font-bold text-xs tracking-widest px-5 py-3 hover:bg-ink hover:text-paper transition-colors duration-300 border border-handwritten shadow-[2px_2px_0px_#1c1c1c] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+      >
+        無料サンプルを相談する
+      </a>
+    </nav>
+
+    <!-- モバイルメニュー開閉ボタン -->
+    <button 
+      id="mobile-menu-toggle" 
+      class="lg:hidden flex flex-col justify-center items-center w-10 h-10 border border-ink bg-paper rounded focus:outline-none z-50"
+      aria-label="メニューを開閉する"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <span class="w-6 h-[2px] bg-ink transition-transform duration-300 my-[3px]" id="bar-1"></span>
+      <span class="w-6 h-[2px] bg-ink transition-opacity duration-300 my-[3px]" id="bar-2"></span>
+      <span class="w-6 h-[2px] bg-ink transition-transform duration-300 my-[3px]" id="bar-3"></span>
+    </button>
+  </div>
+
+  <!-- モバイル ナビゲーション ドロワー -->
+  <nav 
+    id="mobile-nav" 
+    class="fixed inset-y-0 right-0 w-full max-w-sm bg-paper border-l-2 border-ink z-40 transform translate-x-full transition-transform duration-300 ease-editorial shadow-2xl flex flex-col justify-between py-24 px-8"
+    aria-label="モバイルナビゲーション"
+    aria-hidden="true"
+  >
+    <ul class="flex flex-col space-y-6">
+      {siteData.navigation.map((item) => (
+        <li>
+          <a 
+            href={item.url} 
+            class="mobile-link font-serif font-bold text-2xl text-ink hover:text-terracotta transition-colors duration-200 block py-1"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    
+    <div class="mt-auto pt-8 border-t border-ink/20">
+      <p class="font-serif text-xs text-ink-light mb-4">初期費用0円・まずはお試しから</p>
+      <a 
+        href="#contact" 
+        class="mobile-link w-full block text-center bg-terracotta text-paper font-serif font-bold text-sm tracking-widest py-4 border border-handwritten shadow-[3px_3px_0px_#1c1c1c]"
+      >
+        無料サンプルを相談する
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // スクロール時のヘッダー背景色・パディング変更
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    if (header) {
+      if (window.scrollY > 50) {
+        header.classList.add('bg-paper/95', 'backdrop-blur-md', 'py-4', 'border-ink/10');
+        header.classList.remove('py-6', 'border-transparent');
+      } else {
+        header.classList.remove('bg-paper/95', 'backdrop-blur-md', 'py-4', 'border-ink/10');
+        header.classList.add('py-6', 'border-transparent');
+      }
+    }
+  });
+
+  // モバイルメニューのトグル
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  const bar1 = document.getElementById('bar-1');
+  const bar2 = document.getElementById('bar-2');
+  const bar3 = document.getElementById('bar-3');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  
+  let isOpen = false;
+
+  function toggleMenu() {
+    isOpen = !isOpen;
+    if (toggleBtn && mobileNav && bar1 && bar2 && bar3) {
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+      mobileNav.setAttribute('aria-hidden', String(!isOpen));
+      
+      if (isOpen) {
+        mobileNav.classList.remove('translate-x-full');
+        bar1.classList.add('rotate-45', 'translate-y-[8px]');
+        bar2.classList.add('opacity-0');
+        bar3.classList.add('-rotate-45', '-translate-y-[8px]');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileNav.classList.add('translate-x-full');
+        bar1.classList.remove('rotate-45', 'translate-y-[8px]');
+        bar2.classList.remove('opacity-0');
+        bar3.classList.remove('-rotate-45', '-translate-y-[8px]');
+        document.body.style.overflow = '';
+      }
+    }
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', toggleMenu);
+  }
+
+  // リンククリック時に閉じる
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (isOpen) toggleMenu();
+    });
+  });
+</script>

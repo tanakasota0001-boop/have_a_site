@@ -1,0 +1,136 @@
+---
+// System.astro (イラストを削除し、背景色とエディトリアルグリッドで差をつける「仕組み」セクション)
+---
+
+<section id="system" class="py-24 border-t border-b border-ink bg-[#E2D8C3] relative overflow-hidden paper-texture">
+  <!-- 背景で差をつける：前のセクション（Problems：#FDFBF7）と異なるクラフトサンド色（#F4F0E8） -->
+
+  <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+    
+    <!-- セクション見出し (中央揃え) -->
+    <div class="text-center space-y-4 mb-20">
+      <span class="font-hand text-3xl md:text-4xl text-terracotta block">Our Simple Method</span>
+      <h2 class="font-serif font-extrabold text-3xl md:text-4xl text-ink leading-tight">
+        先に試せる、だから安心。
+      </h2>
+      <p class="text-ink-light text-xs md:text-sm max-w-xl mx-auto leading-relaxed pt-2">
+        ご相談いただいたお店の情報をもとに、<br class="hidden md:inline" />実際にインターネット上で動くサンプルサイトを<span class="font-bold text-ink">無料で作成</span>します。<br />完成イメージをご確認いただき、<br class="hidden md:inline" />気に入った場合のみ<span class="font-bold text-ink">正式にご依頼</span>ください。
+      </p>
+    </div>
+
+    <!-- 2ステップのフロー図 (左右に美しく並ぶエディトリアルブロック) -->
+    <div class="grid grid-cols-1 lg:grid-cols-11 gap-8 lg:gap-0 items-center max-w-5xl mx-auto relative mb-12" id="system-flow-container">
+      
+      <!-- ステップ 01 -->
+      <div class="lg:col-span-5 p-8 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] system-flow-card rotate-[-1deg] hover:rotate-0 transition-transform duration-300">
+        <!-- バッジ -->
+        <span class="absolute top-[-14px] left-6 px-3 py-0.5 border-2 border-ink bg-[#FEF08A] font-serif text-[10px] font-bold shadow-[2px_2px_0px_#1c1c1c]">
+          STEP 01
+        </span>
+        
+        <div class="space-y-4 pt-4">
+          <div class="flex items-baseline justify-between border-b border-ink/10 pb-2">
+            <h3 class="font-serif font-extrabold text-xl md:text-2xl text-ink">
+              無料サンプルサイトの作成
+            </h3>
+            <span class="font-yusei text-sm md:text-base text-accent tracking-wider rotate-[-2deg] inline-block">完全無料</span>
+          </div>
+          <p class="text-xs md:text-sm text-ink-light leading-relaxed font-sans">
+            お店の雰囲気や現在のSNS情報を参考に、実際のWebページをお作りします。この段階で契約は一切発生せず、費用も0円ですのでリスクはありません。
+          </p>
+        </div>
+      </div>
+
+      <!-- 中間の進行矢印 (デスクトップ時は中央に、モバイル時は非表示かシンプルな下向き矢印) -->
+      <div class="lg:col-span-1 flex justify-center text-terracotta relative py-4 lg:py-0" id="system-arrow-bridge">
+        <!-- デスクトップ用右向き矢印 -->
+        <div class="hidden lg:block w-16 h-16 pointer-events-none">
+          <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <!-- 手書き風に歪ませた右矢印 -->
+            <path d="M12,51 C28,47 58,54 82,49"></path>
+            <path d="M64,36 C72,42 78,46 82,49"></path>
+            <path d="M62,63 C70,58 76,53 82,49"></path>
+          </svg>
+        </div>
+        <!-- モバイル用下向き矢印 -->
+        <div class="lg:hidden w-10 h-10 pointer-events-none">
+          <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <!-- 手書き風に歪ませた下矢印 -->
+            <path d="M49,12 C45,28 52,58 49,82"></path>
+            <path d="M34,64 C40,72 44,78 49,82"></path>
+            <path d="M63,62 C58,70 53,76 49,82"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ステップ 02 -->
+      <div class="lg:col-span-5 p-8 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] system-flow-card rotate-[1deg] hover:rotate-0 transition-transform duration-300">
+        <!-- バッジ -->
+        <span class="absolute top-[-14px] left-6 px-3 py-0.5 border-2 border-ink bg-[#BAE6FD] font-serif text-[10px] font-bold shadow-[2px_2px_0px_#1c1c1c]">
+          STEP 02
+        </span>
+        
+        <div class="space-y-4 pt-4">
+          <div class="flex items-baseline justify-between border-b border-ink/10 pb-2">
+            <h3 class="font-serif font-extrabold text-xl md:text-2xl text-ink">
+              実物を確認して正式依頼
+            </h3>
+            <span class="font-yusei text-sm md:text-base text-terracotta tracking-wider rotate-[2deg] inline-block">納得後でOK</span>
+          </div>
+          <p class="text-xs md:text-sm text-ink-light leading-relaxed font-sans">
+            「これなら自分のお店に合う」「イメージ通りだ」と実物を見て納得いただいた場合のみ、正式な制作・本契約へと進みます。キャンセルも無料です。
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</section>
+
+<script>
+  // GSAPによるスクロール連動アニメーション
+  const flowContainer = document.getElementById('system-flow-container');
+
+  if (flowContainer) {
+    const observer = new IntersectionObserver(async (entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        observer.unobserve(flowContainer);
+
+        try {
+          const { default: gsap } = await import('gsap');
+          
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            // 2つのブロックを左右から、矢印を中央からフェードさせる
+            gsap.from('.system-flow-card', {
+              opacity: 0,
+              y: 40,
+              scale: 0.95,
+              duration: 0.8,
+              stagger: 0.3,
+              ease: 'power3.out'
+            });
+
+            const bridge = document.getElementById('system-arrow-bridge');
+            if (bridge) {
+              gsap.from(bridge, {
+                opacity: 0,
+                scale: 0.5,
+                delay: 0.5,
+                duration: 0.8,
+                ease: 'back.out(1.5)'
+              });
+            }
+          }
+        } catch (error) {
+          console.error('Failed to load GSAP in System section:', error);
+        }
+      }
+    }, { rootMargin: '100px' });
+
+    observer.observe(flowContainer);
+  }
+</script>

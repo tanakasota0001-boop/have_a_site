@@ -1,0 +1,56 @@
+{
+  "site": {
+    "title": "ホームページ無料サンプル相談 | 塩尻市・松本市のHP制作屋さん",
+    "description": "初期費用0円、月額5,000円から。ご契約前に動くホームページの無料サンプルを作成します。塩尻・松本エリアは対面相談も可能。制作も更新もほぼ丸投げでOKです。",
+    "url": "https://[YOUR_DOMAIN_PLACEHOLDER]"
+  },
+  "contact": {
+    "email": "have.a.site01@gmail.com",
+    "lineUrl": "https://lin.ee/TNxjtDt",
+    "lineQrCode": "/assets/line-qr.png",
+    "lineAccountName": "HaveASite.",
+    "formSubmitUrl": "https://formsubmit.co/have.a.site01@gmail.com"
+  },
+  "company": {
+    "name": "HaveASite."
+  },
+  "pricing": {
+    "basePrice": "5,000",
+    "currency": "円",
+    "extraFeesClarification": "更新有無やサイト構成によって月額料金が異なるため、詳細は相談後に案内いたします。"
+  },
+  "navigation": [
+    {
+      "label": "特徴",
+      "url": "#summary"
+    },
+    {
+      "label": "お悩み",
+      "url": "#problems"
+    },
+    {
+      "label": "仕組み",
+      "url": "#system"
+    },
+    {
+      "label": "選ばれる理由",
+      "url": "#reasons"
+    },
+    {
+      "label": "メリット",
+      "url": "#benefits"
+    },
+    {
+      "label": "流れ",
+      "url": "#flow"
+    },
+    {
+      "label": "料金",
+      "url": "#pricing"
+    },
+    {
+      "label": "よくある質問",
+      "url": "#faq"
+    }
+  ]
+}

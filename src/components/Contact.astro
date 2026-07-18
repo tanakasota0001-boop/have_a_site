@@ -1,0 +1,326 @@
+---
+import siteData from "../data/site-data.json";
+---
+
+<section
+  id="contact"
+  class="py-24 bg-[#E2D8C3] border-b border-ink relative overflow-hidden paper-texture"
+>
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <!-- セクション見出し -->
+    <div class="text-center space-y-4 mb-20">
+      <span class="font-hand text-3xl md:text-4xl text-terracotta block">Contact</span>
+      <h2
+        class="font-serif font-extrabold text-3xl md:text-4xl text-ink leading-tight"
+      >
+        あなたのお店の魅力をカタチに。
+      </h2>
+      <p
+        class="font-serif font-bold text-lg text-ink-light max-w-xl mx-auto leading-relaxed pt-2"
+      >
+        まずは無料サンプルをお試しください。
+      </p>
+    </div>
+
+    <!-- フォームとLINEをまとめた1枚のカード (雑誌の裏表紙・招待状レター風) -->
+    <div class="max-w-2xl mx-auto" id="contact-container">
+      <div
+        class="border-2 border-ink bg-paper p-6 md:p-8 shadow-[6px_6px_0px_#1c1c1c] relative contact-card"
+      >
+        <form
+          id="trial-form"
+          action={siteData.contact.formSubmitUrl}
+          method="POST"
+          class="space-y-6"
+          novalidate
+        >
+          <!-- スパム対策 ハニーポットフィールド (画面外) -->
+          <div class="hidden" aria-hidden="true">
+            <label for="honeypot">この欄は入力しないでください</label>
+            <input type="text" name="honeypot" id="honeypot" tabindex="-1" />
+          </div>
+
+          <!-- お名前 -->
+          <div class="space-y-2">
+            <label
+              for="name"
+              class="font-serif font-bold text-sm text-ink block"
+            >
+              お名前 <span class="text-terracotta text-xs font-sans font-normal"
+                >（必須）</span
+              >
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              class="w-full bg-paper border-2 border-ink p-3 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+              placeholder="山田 太郎"
+              aria-required="true"
+            />
+            <span
+              id="name-error"
+              class="text-xs text-terracotta hidden font-sans"
+              role="alert">お名前を入力してください。</span
+            >
+          </div>
+
+          <!-- 店名 -->
+          <div class="space-y-2">
+            <label
+              for="shop-name"
+              class="font-serif font-bold text-sm text-ink block"
+            >
+              店名 / 事業者名 <span
+                class="text-terracotta text-xs font-sans font-normal"
+                >（必須）</span
+              >
+            </label>
+            <input
+              type="text"
+              name="shop-name"
+              id="shop-name"
+              required
+              class="w-full bg-paper border-2 border-ink p-3 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+              placeholder="○○カフェ"
+              aria-required="true"
+            />
+            <span
+              id="shop-name-error"
+              class="text-xs text-terracotta hidden font-sans"
+              role="alert">店名を入力してください。</span
+            >
+          </div>
+
+          <!-- メールアドレス -->
+          <div class="space-y-2">
+            <label
+              for="email"
+              class="font-serif font-bold text-sm text-ink block"
+            >
+              メールアドレス <span
+                class="text-terracotta text-xs font-sans font-normal"
+                >（必須）</span
+              >
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              class="w-full bg-paper border-2 border-ink p-3 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+              placeholder="your@email.com"
+              aria-required="true"
+            />
+            <span
+              id="email-error"
+              class="text-xs text-terracotta hidden font-sans"
+              role="alert">有効なメールアドレスを入力してください。</span
+            >
+          </div>
+
+          <!-- 相談内容 -->
+          <div class="space-y-2">
+            <label
+              for="message"
+              class="font-serif font-bold text-sm text-ink block"
+            >
+              ご相談内容 <span
+                class="text-terracotta text-xs font-sans font-normal"
+                >（必須）</span
+              >
+            </label>
+            <textarea
+              name="message"
+              id="message"
+              rows="4"
+              required
+              class="w-full bg-paper border-2 border-ink p-3 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+              placeholder="ホームページのイメージ、載せたい情報、その他ご不安なことなどをご自由に入力してください。"
+              aria-required="true"></textarea>
+            <span
+              id="message-error"
+              class="text-xs text-terracotta hidden font-sans"
+              role="alert">ご相談内容を入力してください。</span
+            >
+          </div>
+
+          <!-- プライバシーポリシー同意 -->
+          <div class="space-y-2">
+            <label class="flex items-start gap-2.5 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                name="agree"
+                id="agree"
+                required
+                class="mt-1 w-4 h-4 border-2 border-ink bg-paper focus:ring-2 focus:ring-terracotta"
+                aria-required="true"
+              />
+              <span class="text-xs text-ink-light font-sans leading-tight">
+                <a
+                  href="/privacy-policy"
+                  class="underline hover:text-terracotta"
+                  >プライバシーポリシー</a
+                > に同意して送信する
+              </span>
+            </label>
+            <span
+              id="agree-error"
+              class="text-xs text-terracotta hidden font-sans block"
+              role="alert">プライバシーポリシーへの同意が必要です。</span
+            >
+          </div>
+
+          <!-- 送信ボタン -->
+          <button
+            type="submit"
+            class="w-full max-w-[280px] mx-auto block text-center bg-terracotta text-paper font-serif font-bold text-sm tracking-widest py-3 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200"
+          >
+            無料サンプルについて相談する
+          </button>
+        </form>
+
+        <!-- 区切り線 -->
+        <div class="relative flex py-6 items-center">
+          <div class="flex-grow border-t-2 border-dashed border-ink/20"></div>
+          <span
+            class="flex-shrink mx-4 text-xs md:text-sm font-serif font-bold text-ink-light bg-paper px-3"
+            >またはLINEで相談する</span
+          >
+          <div class="flex-grow border-t-2 border-dashed border-ink/20"></div>
+        </div>
+
+        <!-- LINE相談エリア (縦並び) -->
+        <div
+          class="flex flex-col items-center justify-center gap-4 bg-accent/5 border-2 border-ink p-6 shadow-[4px_4px_0px_#1c1c1c]"
+        >
+          <!-- QRコード -->
+          <div class="flex flex-col items-center justify-center shrink-0">
+            <!-- QRコード画像 -->
+            <div
+              class="w-28 h-28 border-2 border-ink bg-paper p-1.5 shadow-[4px_4px_0px_#1c1c1c]"
+            >
+              <img
+                src={siteData.contact.lineQrCode}
+                alt={`${siteData.contact.lineAccountName} 公式LINE QRコード`}
+                class="w-full h-full object-contain"
+              />
+            </div>
+          </div>
+
+          <!-- LINE友達追加ボタン -->
+          <div class="w-full max-w-[280px]">
+            <a
+              href={siteData.contact.lineUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full text-center bg-[#06C755] text-paper font-serif font-bold text-sm tracking-widest py-3 px-4 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200"
+            >
+              LINEで友達追加する
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // 簡易フォームバリデーション (アクセシビリティ対応)
+  const form = document.getElementById("trial-form") as HTMLFormElement;
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      let hasError = false;
+
+      // 各入力項目の検証
+      const name = document.getElementById("name") as HTMLInputElement;
+      const shopName = document.getElementById("shop-name") as HTMLInputElement;
+      const email = document.getElementById("email") as HTMLInputElement;
+      const message = document.getElementById("message") as HTMLTextAreaElement;
+      const agree = document.getElementById("agree") as HTMLInputElement;
+      const honeypot = document.getElementById("honeypot") as HTMLInputElement;
+
+      // スパムボット対策ハニーポットの検知
+      if (honeypot && honeypot.value !== "") {
+        e.preventDefault();
+        return;
+      }
+
+      // エラーのクリア
+      document
+        .querySelectorAll('[role="alert"]')
+        .forEach((err) => err.classList.add("hidden"));
+
+      if (!name.value.trim()) {
+        document.getElementById("name-error")?.classList.remove("hidden");
+        name.focus();
+        hasError = true;
+      }
+
+      if (!shopName.value.trim()) {
+        document.getElementById("shop-name-error")?.classList.remove("hidden");
+        if (!hasError) shopName.focus();
+        hasError = true;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim() || !emailRegex.test(email.value)) {
+        document.getElementById("email-error")?.classList.remove("hidden");
+        if (!hasError) email.focus();
+        hasError = true;
+      }
+
+      if (!message.value.trim()) {
+        document.getElementById("message-error")?.classList.remove("hidden");
+        if (!hasError) message.focus();
+        hasError = true;
+      }
+
+      if (!agree.checked) {
+        document.getElementById("agree-error")?.classList.remove("hidden");
+        hasError = true;
+      }
+
+      if (hasError) {
+        e.preventDefault();
+      }
+    });
+  }
+
+  // GSAPによるスクロールフェードイン
+  const contactContainer = document.getElementById("contact-container");
+
+  if (contactContainer) {
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          observer.unobserve(contactContainer);
+
+          try {
+            const { default: gsap } = await import("gsap");
+
+            if (
+              !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ) {
+              gsap.from(".contact-card", {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                stagger: 0.25,
+                ease: "power3.out",
+              });
+            }
+          } catch (error) {
+            console.error("Failed to load GSAP in Contact section:", error);
+          }
+        }
+      },
+      { rootMargin: "100px" },
+    );
+
+    observer.observe(contactContainer);
+  }
+</script>

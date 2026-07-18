@@ -1,0 +1,147 @@
+---
+import '../styles/global.css';
+import siteData from '../data/site-data.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = siteData.site.title, 
+  description = siteData.site.description 
+} = Astro.props;
+
+// JSON-LD 構造化データ
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "塩尻市・松本市のHP制作屋さん",
+  "description": description,
+  "url": siteData.site.url,
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "長野県",
+    "addressLocality": "塩尻市・松本市",
+    "addressCountry": "JP"
+  },
+  "priceRange": "¥5000~",
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "塩尻市"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "松本市"
+    }
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "3000",
+    "priceCurrency": "JPY",
+    "description": "初期費用0円、月額3,000円からのホームページ制作・運用保守プラン"
+  }
+};
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={siteData.site.url} />
+    <meta property="og:image" content={`${siteData.site.url}/og-image.png`} />
+    <meta property="og:site_name" content="塩尻市・松本市のHP制作屋さん" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- Google Fonts Preconnect and Load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;700;900&family=Shippori+Mincho:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Yusei+Magic&family=Kiwi+Maru:wght@500;700&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden selection:bg-terracotta/20 selection:text-terracotta">
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-accent focus:text-ink focus:px-4 focus:py-2 focus:z-50 focus:rounded focus:outline-none focus:ring-2 focus:ring-terracotta">
+      メインコンテンツへ移動
+    </a>
+
+    <slot />
+
+    <!-- Lenis & Scroll Animations Bootstrapper -->
+    <script>
+      // ユーザーがアニメーションを抑えたい(prefers-reduced-motion)かを検出
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReducedMotion) {
+        // 動的インポートにより、ファーストビュー（LCP）表示完了後にスムーススクロールとGSAPを遅延ロード
+        window.addEventListener('load', async () => {
+          try {
+            // Lenisのインポートと初期化
+            const { default: Lenis } = await import('lenis');
+            const lenis = new Lenis({
+              duration: 1.2,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+              orientation: 'vertical',
+              gestureOrientation: 'vertical',
+              smoothWheel: true,
+              wheelMultiplier: 1,
+              touchMultiplier: 1.5,
+            });
+
+            // requestAnimationFrame で lenis のアップデートをループ
+            function raf(time: number) {
+              lenis.raf(time);
+              requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // GSAP スムーススクロールとの連携用
+            // @ts-ignore
+            window.lenisInstance = lenis;
+
+            // ページ内アンカーリンクの遷移をLenisでスムーズにする
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+              anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (!targetId || targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                  lenis.scrollTo(target, {
+                    offset: -80, // ヘッダー分を考慮したオフセット
+                    immediate: false
+                  });
+                  
+                  // フォーカス移動 (アクセシビリティ対応)
+                  (target as HTMLElement).focus({ preventScroll: true });
+                }
+              });
+            });
+          } catch (error) {
+            console.error('Failed to initialize dynamic scripts:', error);
+          }
+        });
+      } else {
+        // prefers-reduced-motion が有効な場合の、標準のスクロール挙動
+        document.documentElement.style.scrollBehavior = 'auto';
+      }
+    </script>
+  </body>
+</html>

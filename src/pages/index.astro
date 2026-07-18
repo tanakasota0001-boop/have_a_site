@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Summary from '../components/Summary.astro';
+import Problems from '../components/Problems.astro';
+import System from '../components/System.astro';
+import Reasons from '../components/Reasons.astro';
+import Benefits from '../components/Benefits.astro';
+import Flow from '../components/Flow.astro';
+import Pricing from '../components/Pricing.astro';
+import FAQ from '../components/FAQ.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <!-- ヘッダー -->
+  <Header />
+
+  <!-- メインコンテンツ領域 -->
+  <main id="main-content" class="relative">
+    <!-- 1. ファーストビュー -->
+    <Hero />
+
+    <!-- 2. 安心材料・特徴の要約 -->
+    <Summary />
+
+    <!-- 3. こんなお悩みありませんか -->
+    <Problems />
+
+    <!-- 4. サービスの仕組み -->
+    <System />
+
+    <!-- 5. 選ばれる理由 -->
+    <Reasons />
+
+    <!-- 6. ホームページがあると、お客様の行動が変わります -->
+    <Benefits />
+
+    <!-- 7. 制作の流れ -->
+    <Flow />
+
+    <!-- 8. 費用について ＆ 月額料金に含まれるもの -->
+    <Pricing />
+
+    <!-- 9. よくある質問 (FAQ) -->
+    <FAQ />
+
+    <!-- 10. お問い合わせ・最終CTA -->
+    <Contact />
+  </main>
+
+  <!-- フッター -->
+  <Footer />
+</Layout>
