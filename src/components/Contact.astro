@@ -172,17 +172,45 @@ import siteData from "../data/site-data.json";
             >
           </div>
 
+          <!-- 送信全体のエラーメッセージ -->
+          <div id="submit-error" class="text-xs text-terracotta hidden font-sans text-center mb-4" role="alert">
+            送信中にエラーが発生しました。時間を置いて再度お試しいただくか、LINEからご連絡ください。
+          </div>
+
           <!-- 送信ボタン -->
           <button
             type="submit"
-            class="w-full max-w-[280px] mx-auto block text-center bg-terracotta text-paper font-serif font-bold text-sm tracking-widest py-3 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200"
+            class="w-full max-w-[280px] mx-auto block text-center bg-terracotta text-paper font-serif font-bold text-sm tracking-widest py-3 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] hover:disabled:translate-x-0 hover:disabled:translate-y-0 hover:disabled:shadow-[4px_4px_0px_#1c1c1c] disabled:opacity-75 disabled:cursor-not-allowed transition-all duration-200"
           >
             無料サンプルについて相談する
           </button>
         </form>
 
+        <!-- 送信完了メッセージ (初期状態は非表示) -->
+        <div id="success-message" class="hidden opacity-0 py-12 text-center space-y-6">
+          <div class="w-16 h-16 bg-[#06C755]/10 border-2 border-ink rounded-full flex items-center justify-center mx-auto shadow-[4px_4px_0px_#1c1c1c] rotate-[-3deg]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#06C755]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div class="space-y-2">
+            <h3 class="font-serif font-extrabold text-2xl text-ink">送信が完了しました</h3>
+            <p class="font-serif font-bold text-sm text-ink-light leading-relaxed max-w-md mx-auto px-4">
+              お問い合わせいただき、誠にありがとうございます。<br />
+              ご入力いただいたメールアドレス宛に、自動返信または担当者より数日以内にご連絡いたします。
+            </p>
+          </div>
+          <button
+            id="reset-form-btn"
+            type="button"
+            class="text-xs font-serif font-bold text-ink underline hover:text-terracotta transition-colors"
+          >
+            新しくメッセージを送信する
+          </button>
+        </div>
+
         <!-- 区切り線 -->
-        <div class="relative flex py-6 items-center">
+        <div id="contact-divider" class="relative flex py-6 items-center">
           <div class="flex-grow border-t-2 border-dashed border-ink/20"></div>
           <span
             class="flex-shrink mx-4 text-xs md:text-sm font-serif font-bold text-ink-light bg-paper px-3"
@@ -193,6 +221,7 @@ import siteData from "../data/site-data.json";
 
         <!-- LINE相談エリア (縦並び) -->
         <div
+          id="contact-line-area"
           class="flex flex-col items-center justify-center gap-4 bg-accent/5 border-2 border-ink p-6 shadow-[4px_4px_0px_#1c1c1c]"
         >
           <!-- QRコード -->
@@ -227,11 +256,18 @@ import siteData from "../data/site-data.json";
 </section>
 
 <script>
-  // 簡易フォームバリデーション (アクセシビリティ対応)
+  // 簡易フォームバリデーション (アクセシビリティ対応) & 非同期送信
   const form = document.getElementById("trial-form") as HTMLFormElement;
+  const successMessage = document.getElementById("success-message");
+  const submitError = document.getElementById("submit-error");
+  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const divider = document.getElementById("contact-divider");
+  const lineArea = document.getElementById("contact-line-area");
 
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
       let hasError = false;
 
       // 各入力項目の検証
@@ -244,7 +280,6 @@ import siteData from "../data/site-data.json";
 
       // スパムボット対策ハニーポットの検知
       if (honeypot && honeypot.value !== "") {
-        e.preventDefault();
         return;
       }
 
@@ -252,6 +287,7 @@ import siteData from "../data/site-data.json";
       document
         .querySelectorAll('[role="alert"]')
         .forEach((err) => err.classList.add("hidden"));
+      if (submitError) submitError.classList.add("hidden");
 
       if (!name.value.trim()) {
         document.getElementById("name-error")?.classList.remove("hidden");
@@ -284,7 +320,119 @@ import siteData from "../data/site-data.json";
       }
 
       if (hasError) {
-        e.preventDefault();
+        return;
+      }
+
+      // 送信処理の開始
+      try {
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "送信中...";
+        }
+
+        const formData = new FormData(form);
+
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: {
+            "Accept": "application/json"
+          },
+          body: formData
+        });
+
+        if (response.ok) {
+          try {
+            const { default: gsap } = await import("gsap");
+
+            const elementsToHide = [form, divider, lineArea].filter(Boolean) as HTMLElement[];
+
+            // 既存のコンテンツをフェードアウト
+            gsap.to(elementsToHide, {
+              opacity: 0,
+              y: -20,
+              duration: 0.4,
+              stagger: 0.1,
+              onComplete: () => {
+                elementsToHide.forEach(el => el.classList.add("hidden"));
+                if (successMessage) {
+                  successMessage.classList.remove("hidden");
+                  gsap.to(successMessage, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    ease: "power2.out"
+                  });
+                }
+              }
+            });
+          } catch (e) {
+            // GSAPロード失敗時のフォールバック
+            [form, divider, lineArea].filter(Boolean).forEach(el => el!.classList.add("hidden"));
+            if (successMessage) {
+              successMessage.classList.remove("hidden");
+              successMessage.style.opacity = "1";
+            }
+          }
+        } else {
+          throw new Error("Form submission failed");
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        if (submitError) submitError.classList.remove("hidden");
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "無料サンプルについて相談する";
+        }
+      }
+    });
+  }
+
+  // フォームのリセット処理
+  const resetBtn = document.getElementById("reset-form-btn");
+  if (resetBtn && form && successMessage) {
+    resetBtn.addEventListener("click", async () => {
+      try {
+        const { default: gsap } = await import("gsap");
+
+        gsap.to(successMessage, {
+          opacity: 0,
+          y: 20,
+          duration: 0.4,
+          onComplete: () => {
+            successMessage.classList.add("hidden");
+            form.reset();
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = "無料サンプルについて相談する";
+            }
+
+            const elementsToShow = [form, divider, lineArea].filter(Boolean) as HTMLElement[];
+            elementsToShow.forEach(el => {
+              el.classList.remove("hidden");
+              gsap.set(el, { opacity: 0, y: 20 });
+            });
+
+            gsap.to(elementsToShow, {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power2.out"
+            });
+          }
+        });
+      } catch (e) {
+        // フォールバック
+        successMessage.classList.add("hidden");
+        form.reset();
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "無料サンプルについて相談する";
+        }
+        [form, divider, lineArea].filter(Boolean).forEach(el => {
+          el!.classList.remove("hidden");
+          el!.style.opacity = "1";
+        });
       }
     });
   }
