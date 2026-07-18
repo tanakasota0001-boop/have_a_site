@@ -22,62 +22,64 @@ const sortedFlowSteps = flowSteps.sort(
       </h2>
     </div>
 
-    <!-- ステップリスト (横並び) -->
+    <!-- ステップリスト (モバイルではFlexboxで縦並び、PCではGrid) -->
     <div
-      class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 relative"
+      class="flex flex-col md:grid md:grid-cols-4 gap-6 md:gap-8 relative"
       id="flow-steps-container"
     >
       {
         sortedFlowSteps.map((step, index) => {
           return (
-            <div class="relative group">
-              {/* デスクトップ用：ステップ間の矢印コネクタ */}
-              {index < sortedFlowSteps.length - 1 && (
-                <div class="hidden md:block absolute top-1/2 left-[calc(100%_+_4px)] -translate-y-1/2 z-20 pointer-events-none">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="w-6 h-6 text-ink/30"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-              )}
-
-              {/* ステップカード */}
-              <div class="flow-card h-full p-6 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] transition-all hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] duration-300 flex flex-col justify-between">
-                <div>
-                  {/* ステップ番号バッジ */}
-                  <div class="flex items-center justify-between mb-4">
-                    <span class="font-hand text-3xl font-bold text-terracotta">
-                      0{index + 1}
-                    </span>
-                    <span class="font-serif text-[10px] text-ink/40 tracking-widest uppercase font-bold">
-                      {step.data.step}
-                    </span>
+            <>
+              <div class="relative group h-full flex flex-col">
+                {/* デスクトップ用：ステップ間の矢印コネクタ */}
+                {index < sortedFlowSteps.length - 1 && (
+                  <div class="hidden md:block absolute top-1/2 left-[calc(100%_+_4px)] -translate-y-1/2 z-20 pointer-events-none">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6 text-ink/30"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
                   </div>
+                )}
 
-                  <div class="space-y-3">
-                    <h3 class="font-serif font-extrabold text-lg md:text-xl text-ink pb-2 border-b border-ink/10">
-                      {step.data.title}
-                    </h3>
-                    <div class="text-xs md:text-sm text-ink-light leading-relaxed font-sans whitespace-pre-wrap">
-                      {step.body.trim()}
+                {/* ステップカード */}
+                <div class="flow-card h-full p-6 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] transition-all hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] duration-300 flex flex-col justify-between min-h-[210px] md:min-h-0">
+                  <div>
+                    {/* ステップ番号バッジ */}
+                    <div class="flex items-center justify-between mb-4">
+                      <span class="font-hand text-3xl font-bold text-terracotta">
+                        0{index + 1}
+                      </span>
+                      <span class="font-serif text-[10px] text-ink/40 tracking-widest uppercase font-bold">
+                        {step.data.step}
+                      </span>
+                    </div>
+
+                    <div class="space-y-3">
+                      <h3 class="font-serif font-extrabold text-lg md:text-xl text-ink pb-2 border-b border-ink/10">
+                        {step.data.title}
+                      </h3>
+                      <div class="text-xs md:text-sm text-ink-light leading-relaxed font-sans whitespace-pre-wrap">
+                        {step.body.trim()}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* モバイル用：ステップ間の下向き矢印コネクタ */}
+              {/* モバイル用：ステップ間の下向き矢印コネクタ (完全に並列化して被りを防止) */}
               {index < sortedFlowSteps.length - 1 && (
-                <div class="md:hidden flex justify-center relative z-10 mt-10 mb-4 text-terracotta/40">
+                <div class="md:hidden flex justify-center py-4 text-terracotta/40">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="w-6 h-6 animate-bounce"
@@ -94,7 +96,7 @@ const sortedFlowSteps = flowSteps.sort(
                   </svg>
                 </div>
               )}
-            </div>
+            </>
           );
         })
       }
