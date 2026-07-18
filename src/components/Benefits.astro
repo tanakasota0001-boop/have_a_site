@@ -94,6 +94,12 @@ const sortedBenefits = benefits.sort((a, b) => a.data.sortOrder - b.data.sortOrd
               scrollTrigger: {
                 trigger: list,
                 start: 'top 80%',
+              },
+              onStart: function() {
+                gsap.set('.benefit-item', { transition: 'none' });
+              },
+              onComplete: function() {
+                gsap.set('.benefit-item', { clearProps: "transition,opacity,transform" });
               }
             });
           }

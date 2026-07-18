@@ -26,7 +26,7 @@ const features = [
     <!-- タイトルとマガジン風ライン -->
     <div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div class="space-y-2">
-        <span class="font-hand text-3xl text-terracotta block">Introductory Features</span>
+        <span class="font-hand text-3xl text-terracotta block">Features</span>
         <h2 class="font-serif font-extrabold text-3xl md:text-4xl text-ink leading-tight">
           はじめてでも安心の3つのポイント
         </h2>
@@ -90,7 +90,13 @@ const features = [
               y: 50,
               duration: 0.8,
               stagger: 0.2,
-              ease: 'power3.out'
+              ease: 'power3.out',
+              onStart: function() {
+                gsap.set('.feature-card', { transition: 'none' });
+              },
+              onComplete: function() {
+                gsap.set('.feature-card', { clearProps: "transition,opacity,transform" });
+              }
             });
           }
         } catch (error) {

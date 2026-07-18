@@ -48,7 +48,7 @@ import siteData from "../data/site-data.json";
     </div>
 
     <!-- 右：お問い合わせ・ご相談 -->
-    <div class="space-y-4 max-w-[280px] md:ml-auto w-full">
+    <div class="space-y-4 md:max-w-[280px] md:ml-auto w-full">
       <h3
         class="font-serif font-bold text-sm tracking-wider text-accent border-b border-paper/10 pb-2"
       >
@@ -57,10 +57,10 @@ import siteData from "../data/site-data.json";
       <p class="text-xs text-paper/60 leading-relaxed">
         ホームページ無料サンプルのご相談は、フォームまたは公式LINEより承っております。まずはお気軽にご連絡ください。
       </p>
-      <div class="space-y-2 pt-2">
+      <div class="space-y-2 pt-2 flex flex-col items-center md:items-stretch">
         <a
           href="#contact"
-          class="block text-center bg-terracotta text-paper font-serif font-bold text-[11px] tracking-widest py-2 hover:bg-paper hover:text-ink transition-colors duration-300 border border-paper"
+          class="block w-full max-w-[280px] text-center bg-terracotta text-paper font-serif font-bold text-[11px] tracking-widest py-2 hover:bg-paper hover:text-ink transition-colors duration-300 border border-paper"
         >
           フォームから相談する
         </a>
@@ -68,7 +68,7 @@ import siteData from "../data/site-data.json";
           href={siteData.contact.lineUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="block text-center bg-[#06C755] text-paper font-serif font-bold text-[11px] tracking-widest py-2 hover:bg-paper hover:text-[#06C755] transition-colors duration-300 border border-[#06C755]"
+          class="block w-full max-w-[280px] text-center bg-[#06C755] text-paper font-serif font-bold text-[11px] tracking-widest py-2 hover:bg-paper hover:text-[#06C755] transition-colors duration-300 border border-[#06C755]"
         >
           LINEから相談する
         </a>

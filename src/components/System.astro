@@ -111,7 +111,13 @@
               scale: 0.95,
               duration: 0.8,
               stagger: 0.3,
-              ease: 'power3.out'
+              ease: 'power3.out',
+              onStart: function() {
+                gsap.set('.system-flow-card', { transition: 'none' });
+              },
+              onComplete: function() {
+                gsap.set('.system-flow-card', { clearProps: "transition,opacity,transform" });
+              }
             });
 
             const bridge = document.getElementById('system-arrow-bridge');

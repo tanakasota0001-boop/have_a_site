@@ -125,7 +125,13 @@ const badgeColors = [
               y: 50,
               duration: 0.8,
               stagger: 0.2,
-              ease: 'power3.out'
+              ease: 'power3.out',
+              onStart: function() {
+                gsap.set('.reason-card', { transition: 'none' });
+              },
+              onComplete: function() {
+                gsap.set('.reason-card', { clearProps: "transition,opacity,transform" });
+              }
             });
           }
         } catch (error) {

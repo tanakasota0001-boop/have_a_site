@@ -1,0 +1,298 @@
+﻿commit 0a8660fd55726a62307ab9e37a2c472c5426c30c
+Author: tanakasota0001-boop <have.a.site01@gmail.com>
+Date:   Sat Jul 18 17:24:14 2026 +0900
+
+    refactor: 繝｢繝舌う繝ｫ遶ｯ譛ｫ陦ｨ遉ｺ縺翫ｈ縺ｳ謫堺ｽ懈ｧ・・X・峨・譛驕ｩ蛹門ｯｾ蠢・
+diff --git a/src/components/Benefits.astro b/src/components/Benefits.astro
+index 2e5c452..9cea3fc 100644
+--- a/src/components/Benefits.astro
++++ b/src/components/Benefits.astro
+@@ -27,7 +27,7 @@ const sortedBenefits = benefits.sort((a, b) => a.data.sortOrder - b.data.sortOrd
+         {sortedBenefits.map((benefit, index) => {
+           const badgeBg = index % 2 === 0 ? "bg-accent text-ink" : "bg-terracotta text-paper";
+           return (
+-            <div class="benefit-item relative p-8 md:p-10 border-2 border-ink bg-paper shadow-[6px_6px_0px_#1c1c1c] rounded-sm transition-all duration-300 hover:shadow-[2px_2px_0px_#1c1c1c] hover:translate-x-[4px] hover:translate-y-[4px] benefits-card-grid">
++            <div class="benefit-item relative p-6 sm:p-8 md:p-10 border-2 border-ink bg-paper shadow-[6px_6px_0px_#1c1c1c] rounded-sm transition-all duration-300 hover:shadow-[2px_2px_0px_#1c1c1c] hover:translate-x-[4px] hover:translate-y-[4px] benefits-card-grid">
+               <!-- 繧､繝ｳ繝・ャ繧ｯ繧ｹ繝輔か繝ｫ繝鬚ｨ縺ｮ繧ｿ繝悶ヰ繝・ず -->
+               <div class={`absolute -top-[30px] left-6 border-2 border-b-0 border-ink font-hand text-base md:text-lg font-bold px-4 py-0.5 rounded-t-md ${badgeBg} shadow-[1px_0px_0px_rgba(0,0,0,0.05)]`}>
+                 Benefit 0{index + 1}
+diff --git a/src/components/Contact.astro b/src/components/Contact.astro
+index 91d539e..82e2436 100644
+--- a/src/components/Contact.astro
++++ b/src/components/Contact.astro
+@@ -11,7 +11,7 @@ import siteData from "../data/site-data.json";
+     <div class="text-center space-y-4 mb-20">
+       <span class="font-hand text-3xl md:text-4xl text-terracotta block">Contact</span>
+       <h2
+-        class="font-serif font-extrabold text-3xl md:text-4xl text-ink leading-tight"
++        class="font-serif font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink leading-tight"
+       >
+         縺ゅ↑縺溘・縺雁ｺ励・鬲・鴨繧偵き繧ｿ繝√↓縲・       </h2>
+@@ -55,7 +55,7 @@ import siteData from "../data/site-data.json";
+               name="name"
+               id="name"
+               required
+-              class="w-full bg-paper border-2 border-ink p-3 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
++              class="w-full bg-paper border-2 border-ink p-3 text-base focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+               placeholder="螻ｱ逕ｰ 螟ｪ驛・
+               aria-required="true"
+             />
+@@ -82,7 +82,7 @@ import siteData from "../data/site-data.json";
+               name="shop-name"
+               id="shop-name"
+               required
+-              class="w-full bg-paper border-2 border-ink p-3 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
++              class="w-full bg-paper border-2 border-ink p-3 text-base focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+               placeholder="笳銀雷繧ｫ繝輔ぉ"
+               aria-required="true"
+             />
+@@ -109,7 +109,7 @@ import siteData from "../data/site-data.json";
+               name="email"
+               id="email"
+               required
+-              class="w-full bg-paper border-2 border-ink p-3 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
++              class="w-full bg-paper border-2 border-ink p-3 text-base focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+               placeholder="your@email.com"
+               aria-required="true"
+             />
+@@ -136,7 +136,7 @@ import siteData from "../data/site-data.json";
+               id="message"
+               rows="4"
+               required
+-              class="w-full bg-paper border-2 border-ink p-3 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
++              class="w-full bg-paper border-2 border-ink p-3 text-base focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+               placeholder="繝帙・繝繝壹・繧ｸ縺ｮ繧､繝｡繝ｼ繧ｸ縲∬ｼ峨○縺溘＞諠・ｱ縲√◎縺ｮ莉悶＃荳榊ｮ峨↑縺薙→縺ｪ縺ｩ繧偵＃閾ｪ逕ｱ縺ｫ蜈･蜉帙＠縺ｦ縺上□縺輔＞縲・
+               aria-required="true"></textarea>
+             <span
+diff --git a/src/components/Flow.astro b/src/components/Flow.astro
+index 265a72c..6ad49b1 100644
+--- a/src/components/Flow.astro
++++ b/src/components/Flow.astro
+@@ -16,7 +16,7 @@ const sortedFlowSteps = flowSteps.sort(
+     <div class="text-center space-y-4 mb-16">
+       <span class="font-hand text-3xl text-terracotta block">Flow</span>
+       <h2
+-        class="font-serif font-extrabold text-3xl md:text-4xl text-ink leading-tight"
++        class="font-serif font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink leading-tight"
+       >
+         繝帙・繝繝壹・繧ｸ螳梧・縺ｾ縺ｧ縺ｮ豬√ｌ
+       </h2>
+@@ -74,6 +74,26 @@ const sortedFlowSteps = flowSteps.sort(
+                   </div>
+                 </div>
+               </div>
++
++              {/* 繝｢繝舌う繝ｫ逕ｨ・壹せ繝・ャ繝鈴俣縺ｮ荳句髄縺咲泙蜊ｰ繧ｳ繝阪け繧ｿ */}
++              {index < sortedFlowSteps.length - 1 && (
++                <div class="md:hidden flex justify-center mt-6 -mb-2 text-terracotta/40">
++                  <svg
++                    xmlns="http://www.w3.org/2000/svg"
++                    class="w-6 h-6 animate-bounce"
++                    fill="none"
++                    viewBox="0 0 24 24"
++                    stroke="currentColor"
++                    stroke-width="2.5"
++                  >
++                    <path
++                      stroke-linecap="round"
++                      stroke-linejoin="round"
++                      d="M19 9l-7 7-7-7"
++                    />
++                  </svg>
++                </div>
++              )}
+             </div>
+           );
+         })
+diff --git a/src/components/Header.astro b/src/components/Header.astro
+index 8b043e2..fa39a55 100644
+--- a/src/components/Header.astro
++++ b/src/components/Header.astro
+@@ -38,7 +38,7 @@ import siteData from '../data/site-data.json';
+     <!-- 繝｢繝舌う繝ｫ繝｡繝九Η繝ｼ髢矩哩繝懊ち繝ｳ -->
+     <button 
+       id="mobile-menu-toggle" 
+-      class="lg:hidden flex flex-col justify-center items-center w-10 h-10 border border-ink bg-paper rounded focus:outline-none z-50"
++      class="lg:hidden flex flex-col justify-center items-center w-11 h-11 border-2 border-ink bg-paper rounded focus:outline-none z-50"
+       aria-label="繝｡繝九Η繝ｼ繧帝幕髢峨☆繧・
+       aria-expanded="false"
+       aria-controls="mobile-nav"
+@@ -49,6 +49,13 @@ import siteData from '../data/site-data.json';
+     </button>
+   </div>
+ 
++  <!-- 繝｢繝舌う繝ｫ繝｡繝九Η繝ｼ閭梧勹繧ｪ繝ｼ繝舌・繝ｬ繧､ -->
++  <div 
++    id="mobile-menu-overlay" 
++    class="fixed inset-0 bg-ink/40 backdrop-blur-sm z-30 opacity-0 pointer-events-none transition-opacity duration-300"
++    aria-hidden="true"
++  ></div>
++
+   <!-- 繝｢繝舌う繝ｫ 繝翫ン繧ｲ繝ｼ繧ｷ繝ｧ繝ｳ 繝峨Ο繝ｯ繝ｼ -->
+   <nav 
+     id="mobile-nav" 
+@@ -99,6 +106,7 @@ import siteData from '../data/site-data.json';
+   // 繝｢繝舌う繝ｫ繝｡繝九Η繝ｼ縺ｮ繝医げ繝ｫ
+   const toggleBtn = document.getElementById('mobile-menu-toggle');
+   const mobileNav = document.getElementById('mobile-nav');
++  const overlay = document.getElementById('mobile-menu-overlay');
+   const bar1 = document.getElementById('bar-1');
+   const bar2 = document.getElementById('bar-2');
+   const bar3 = document.getElementById('bar-3');
+@@ -108,22 +116,40 @@ import siteData from '../data/site-data.json';
+ 
+   function toggleMenu() {
+     isOpen = !isOpen;
+-    if (toggleBtn && mobileNav && bar1 && bar2 && bar3) {
++    if (toggleBtn && mobileNav && overlay && bar1 && bar2 && bar3) {
+       toggleBtn.setAttribute('aria-expanded', String(isOpen));
+       mobileNav.setAttribute('aria-hidden', String(!isOpen));
+       
+       if (isOpen) {
+         mobileNav.classList.remove('translate-x-full');
++        overlay.classList.remove('opacity-0', 'pointer-events-none');
++        overlay.classList.add('opacity-100');
+         bar1.classList.add('rotate-45', 'translate-y-[8px]');
+         bar2.classList.add('opacity-0');
+         bar3.classList.add('-rotate-45', '-translate-y-[8px]');
+         document.body.style.overflow = 'hidden';
++        
++        // Lenis繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ繧貞●豁｢
++        // @ts-ignore
++        if (window.lenisInstance) {
++          // @ts-ignore
++          window.lenisInstance.stop();
++        }
+       } else {
+         mobileNav.classList.add('translate-x-full');
++        overlay.classList.remove('opacity-100');
++        overlay.classList.add('opacity-0', 'pointer-events-none');
+         bar1.classList.remove('rotate-45', 'translate-y-[8px]');
+         bar2.classList.remove('opacity-0');
+         bar3.classList.remove('-rotate-45', '-translate-y-[8px]');
+         document.body.style.overflow = '';
++        
++        // Lenis繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ繧貞・髢・+        // @ts-ignore
++        if (window.lenisInstance) {
++          // @ts-ignore
++          window.lenisInstance.start();
++        }
+       }
+     }
+   }
+@@ -132,6 +158,13 @@ import siteData from '../data/site-data.json';
+     toggleBtn.addEventListener('click', toggleMenu);
+   }
+ 
++  // 繧ｪ繝ｼ繝舌・繝ｬ繧､繧ｯ繝ｪ繝・け譎ゅ↓髢峨§繧・+  if (overlay) {
++    overlay.addEventListener('click', () => {
++      if (isOpen) toggleMenu();
++    });
++  }
++
+   // 繝ｪ繝ｳ繧ｯ繧ｯ繝ｪ繝・け譎ゅ↓髢峨§繧・   mobileLinks.forEach(link => {
+     link.addEventListener('click', () => {
+diff --git a/src/components/Hero.astro b/src/components/Hero.astro
+index 5a56d4a..afbf3f3 100644
+--- a/src/components/Hero.astro
++++ b/src/components/Hero.astro
+@@ -45,7 +45,7 @@
+ 
+           <!-- 2陦檎岼: 繝帙・繝繝壹・繧ｸ (謇区嶌縺堺ｸｸ蝗ｲ縺ｿ莉倥″) -->
+           <span
+-            class="relative inline-block px-5 py-2 my-1 text-4xl md:text-6xl lg:text-7xl text-terracotta rotate-[-1.5deg] origin-left scale-[1.03] transition-transform duration-300 hover:rotate-0"
++            class="relative inline-block px-5 py-2 my-1 text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-terracotta rotate-[-1.5deg] origin-left scale-[1.03] transition-transform duration-300 hover:rotate-0"
+           >
+             繝帙・繝繝壹・繧ｸ
+             <!-- 謇区嶌縺阪・荳ｸ縺ｧ蝗ｲ繧SVG -->
+@@ -65,8 +65,8 @@
+           </span>
+ 
+           <!-- 3陦檎岼: 辟｡譁吶〒縺ｿ縺ｦ縺ｿ縺ｾ縺帙ｓ縺具ｼ・-->
+-          <span class="block text-3xl md:text-5xl lg:text-6xl mt-1.5">
+-            辟｡譁吶〒縺ｿ縺ｦ縺ｿ縺ｾ縺帙ｓ縺具ｼ・+          <span class="block text-2xl sm:text-3xl md:text-5xl lg:text-6xl mt-1.5 leading-tight">
++            <span class="inline-block">辟｡譁吶〒</span><span class="inline-block">縺ｿ縺ｦ縺ｿ縺ｾ縺帙ｓ縺具ｼ・/span>
+           </span>
+         </h1>
+ 
+diff --git a/src/components/Pricing.astro b/src/components/Pricing.astro
+index 0933a1a..077514e 100644
+--- a/src/components/Pricing.astro
++++ b/src/components/Pricing.astro
+@@ -40,7 +40,7 @@ const sortedIncludes = pricingIncludes.sort(
+     >
+       <!-- 蟾ｦ・壻ｸｻ隕∵侭驥・(蛻晄悄雋ｻ逕ｨ0蜀・ｼ・怦鬘肴侭驥・ (7繧ｫ繝ｩ繝) -->
+       <div
+-        class="lg:col-span-7 border-2 border-ink bg-paper p-8 md:p-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-between relative pricing-card"
++        class="lg:col-span-7 border-2 border-ink bg-paper p-6 sm:p-8 md:p-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-between relative pricing-card"
+       >
+         <!-- 繝舌ャ繧ｸ -->
+         <span
+@@ -116,9 +116,8 @@ const sortedIncludes = pricingIncludes.sort(
+         <!-- 蜿ｳ荳奇ｼ壽怦鬘肴侭驥代↓蜷ｫ縺ｾ繧後ｋ繧ゅ・ - 蜷ｹ縺榊・縺励ョ繧ｶ繧､繝ｳ (繧ｵ繧､繧ｺ繧偵さ繝ｳ繝代け繝医↓縺励｝op縺ｪ鮟・牡閭梧勹縺ｸ縲∝だ縺阪↑縺・ -->
+         <div
+           class="border-2 border-ink bg-[#FEF8E7] px-6 py-8 md:px-7 md:py-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-start relative pricing-card
+-          before:content-[''] before:absolute before:z-10
+-          before:top-0 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-4 before:h-4 before:bg-[#FEF8E7] before:border-t-2 before:border-l-2 before:border-ink before:rotate-45
+-          lg:before:top-[178px] lg:before:left-0 lg:before:-translate-x-1/2 lg:before:translate-y-0 lg:before:border-t-0 lg:before:border-r-0 lg:before:border-l-2 lg:before:border-b-2 lg:before:bg-[#FEF8E7]"
++          lg:before:content-[''] lg:before:absolute lg:before:z-10
++          lg:before:top-[178px] lg:before:left-0 lg:before:-translate-x-1/2 lg:before:w-4 lg:before:h-4 lg:before:bg-[#FEF8E7] lg:before:border-l-2 lg:before:border-b-2 lg:before:border-ink lg:before:rotate-45"
+         >
+           <div class="space-y-4">
+             <h3
+diff --git a/src/components/Problems.astro b/src/components/Problems.astro
+index 3d99a5c..1a30ff4 100644
+--- a/src/components/Problems.astro
++++ b/src/components/Problems.astro
+@@ -47,7 +47,7 @@ const problems = [
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto" id="problems-grid">
+       {problems.map((prob) => (
+         <div 
+-          class={`problem-sticky p-6 border-2 border-ink ${prob.bg} ${prob.rotation} shadow-[4px_4px_0px_#1c1c1c] transition-transform duration-300 hover:rotate-0 flex flex-col justify-between aspect-[1.4/1] relative`}
++          class={`problem-sticky p-6 border-2 border-ink ${prob.bg} ${prob.rotation} shadow-[4px_4px_0px_#1c1c1c] transition-transform duration-300 hover:rotate-0 flex flex-col justify-between aspect-auto min-h-[160px] sm:aspect-[1.4/1] relative`}
+           id={prob.id}
+         >
+           <!-- 隗偵・繝・・繝鈴｢ｨ陬・｣ｾ・医お繝・ぅ繝医Μ繧｢繝ｫ・・-->
+diff --git a/src/components/Reasons.astro b/src/components/Reasons.astro
+index f6f0e04..d668c06 100644
+--- a/src/components/Reasons.astro
++++ b/src/components/Reasons.astro
+@@ -34,7 +34,7 @@ const badgeColors = [
+ 
+         return (
+           <div 
+-            class={`reason-card p-8 md:p-10 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] transition-all duration-300 hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] ${offsetClass}`}
++            class={`reason-card p-6 sm:p-8 md:p-10 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] transition-all duration-300 hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] ${offsetClass}`}
+             data-index={index}
+           >
+             <!-- 蟾ｦ荳翫・謇区嶌縺埼｢ｨ繧ｹ繝・ャ繝励ヰ繝・ず -->
+diff --git a/src/components/System.astro b/src/components/System.astro
+index 94c0401..c1b52ca 100644
+--- a/src/components/System.astro
++++ b/src/components/System.astro
+@@ -10,7 +10,7 @@
+     <!-- 繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ隕句・縺・(荳ｭ螟ｮ謠・∴) -->
+     <div class="text-center space-y-4 mb-20">
+       <span class="font-hand text-3xl md:text-4xl text-terracotta block">Our Simple Method</span>
+-      <h2 class="font-serif font-extrabold text-3xl md:text-4xl text-ink leading-tight">
++      <h2 class="font-serif font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink leading-tight">
+         蜈医↓隧ｦ縺帙ｋ縲√□縺九ｉ螳牙ｿ・・       </h2>
+       <p class="text-ink-light text-xs md:text-sm max-w-xl mx-auto leading-relaxed pt-2">
+@@ -22,7 +22,7 @@
+     <div class="grid grid-cols-1 lg:grid-cols-11 gap-8 lg:gap-0 items-center max-w-5xl mx-auto relative mb-12" id="system-flow-container">
+       
+       <!-- 繧ｹ繝・ャ繝・01 -->
+-      <div class="lg:col-span-5 p-8 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] system-flow-card rotate-[-1deg] hover:rotate-0 transition-transform duration-300">
++      <div class="lg:col-span-5 p-6 sm:p-8 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] system-flow-card rotate-[-1deg] hover:rotate-0 transition-transform duration-300">
+         <!-- 繝舌ャ繧ｸ -->
+         <span class="absolute top-[-14px] left-6 px-3 py-0.5 border-2 border-ink bg-[#FEF08A] font-serif text-[10px] font-bold shadow-[2px_2px_0px_#1c1c1c]">
+           STEP 01
+@@ -64,7 +64,7 @@
+       </div>
+ 
+       <!-- 繧ｹ繝・ャ繝・02 -->
+-      <div class="lg:col-span-5 p-8 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] system-flow-card rotate-[1deg] hover:rotate-0 transition-transform duration-300">
++      <div class="lg:col-span-5 p-6 sm:p-8 border-2 border-ink bg-paper relative shadow-[6px_6px_0px_#1c1c1c] system-flow-card rotate-[1deg] hover:rotate-0 transition-transform duration-300">
+         <!-- 繝舌ャ繧ｸ -->
+         <span class="absolute top-[-14px] left-6 px-3 py-0.5 border-2 border-ink bg-[#BAE6FD] font-serif text-[10px] font-bold shadow-[2px_2px_0px_#1c1c1c]">
+           STEP 02

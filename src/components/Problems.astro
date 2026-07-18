@@ -100,7 +100,13 @@ const problems = [
               rotation: () => (Math.random() - 0.5) * 15,
               duration: 1,
               stagger: 0.25,
-              ease: 'back.out(1.5)'
+              ease: 'back.out(1.5)',
+              onStart: function() {
+                gsap.set('.problem-sticky', { transition: 'none' });
+              },
+              onComplete: function() {
+                gsap.set('.problem-sticky', { clearProps: "transition,opacity,transform" });
+              }
             });
           }
         } catch (error) {

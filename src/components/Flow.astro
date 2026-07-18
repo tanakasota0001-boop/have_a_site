@@ -133,6 +133,12 @@ const sortedFlowSteps = flowSteps.sort(
                   trigger: flowContainer,
                   start: "top 80%",
                 },
+                onStart: function() {
+                  gsap.set(".flow-card", { transition: "none" });
+                },
+                onComplete: function() {
+                  gsap.set(".flow-card", { clearProps: "transition,opacity,transform" });
+                }
               });
             }
           } catch (error) {
