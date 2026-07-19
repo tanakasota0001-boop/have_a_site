@@ -3,8 +3,11 @@ import siteData from '../data/site-data.json';
 import logoImage from '../assets/logo.png';
 ---
 
-<header id="site-header" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 border-b border-transparent">
-  <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+<header id="site-header" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6">
+  <!-- ヘッダー背景用デコレーション (スクロール時にbackdrop-filter等が適用される) -->
+  <div id="header-bg" class="absolute inset-0 z-[-1] transition-all duration-300 border-b border-transparent"></div>
+  
+  <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between relative z-10">
     <!-- ロゴ (HaveASite.) -->
     <a href="#" class="group flex items-center focus:outline-none" aria-label="HaveASite. ホーム">
       <img 
@@ -96,14 +99,19 @@ import logoImage from '../assets/logo.png';
 <script>
   // スクロール時のヘッダー背景色・パディング変更
   const header = document.getElementById('site-header');
+  const headerBg = document.getElementById('header-bg');
   window.addEventListener('scroll', () => {
-    if (header) {
+    if (header && headerBg) {
       if (window.scrollY > 50) {
-        header.classList.add('bg-paper/95', 'backdrop-blur-md', 'py-4', 'border-ink/10');
-        header.classList.remove('py-6', 'border-transparent');
+        header.classList.add('py-4');
+        header.classList.remove('py-6');
+        headerBg.classList.add('bg-paper/95', 'backdrop-blur-md', 'border-ink/10');
+        headerBg.classList.remove('border-transparent');
       } else {
-        header.classList.remove('bg-paper/95', 'backdrop-blur-md', 'py-4', 'border-ink/10');
-        header.classList.add('py-6', 'border-transparent');
+        header.classList.remove('py-4');
+        header.classList.add('py-6');
+        headerBg.classList.remove('bg-paper/95', 'backdrop-blur-md', 'border-ink/10');
+        headerBg.classList.add('border-transparent');
       }
     }
   });
