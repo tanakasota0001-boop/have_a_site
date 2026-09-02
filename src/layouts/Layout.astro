@@ -202,7 +202,12 @@ if (schema) {
               anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
-                if (!targetId || targetId === '#') return;
+                if (!targetId) return;
+                
+                if (targetId === '#' || targetId === '#top') {
+                  lenis.scrollTo(0, { immediate: false });
+                  return;
+                }
                 
                 const target = document.querySelector(targetId);
                 if (target) {

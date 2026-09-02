@@ -101,14 +101,27 @@ import logoImage from "../assets/logo.png";
       <p>&copy; 2026 HaveASite. All rights reserved.</p>
     </div>
 
-    <!-- トップに戻るボタン (^) -->
+    <!-- トップに戻るボタン (モバイル: 右側配置＆モダンな矢印デザイン / PC: 既存の見た目・配置を完全維持) -->
     <a
       href="#"
-      class="w-9 h-9 rounded-full border border-paper/30 flex items-center justify-center text-paper/80 hover:text-ink hover:bg-accent hover:border-accent transition-all font-mono font-bold text-sm shadow-[2px_2px_0px_rgba(0,0,0,0.3)] select-none shrink-0"
+      class="self-end sm:self-auto flex items-center justify-center transition-all select-none shrink-0 w-11 h-11 rounded-full bg-paper/10 border-2 border-paper/30 text-paper shadow-[2px_2px_0px_rgba(0,0,0,0.3)] active:bg-accent active:text-ink active:border-accent active:scale-95 sm:w-9 sm:h-9 sm:rounded-full sm:bg-transparent sm:border sm:border-paper/30 sm:text-paper/80 sm:hover:text-ink sm:hover:bg-accent sm:hover:border-accent sm:font-mono sm:font-bold sm:text-sm sm:shadow-[2px_2px_0px_rgba(0,0,0,0.3)] sm:active:scale-100"
       aria-label="ページトップへ戻る"
       title="ページトップへ戻る"
     >
-      ^
+      <!-- モバイル用：洗練された上向き矢印アイコン -->
+      <svg
+        class="w-5 h-5 block sm:hidden"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+      <!-- PC用：既存の「^」をそのまま表示 -->
+      <span class="hidden sm:inline">^</span>
     </a>
   </div>
 </footer>
