@@ -12,7 +12,12 @@ const worksWithImages = await Promise.all(
     const filename = work.image.split('/').pop();
     const imageImport = images[`../assets/works/${filename}`];
     const image = imageImport ? (await imageImport()).default : null;
-    return { ...work, image };
+
+    const mobileFilename = work.mobileImage ? work.mobileImage.split('/').pop() : null;
+    const mobileImageImport = mobileFilename ? images[`../assets/works/${mobileFilename}`] : null;
+    const mobileImage = mobileImageImport ? (await mobileImageImport()).default : null;
+
+    return { ...work, image, mobileImage };
   })
 );
 ---
@@ -21,17 +26,17 @@ const worksWithImages = await Promise.all(
   <div class="max-w-7xl mx-auto px-6 md:px-12">
     
     <!-- セクション見出し -->
-    <div class="mb-16 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-ink/10 pb-8">
+    <div class="mb-14 sm:mb-16 border-b border-ink/10 pb-6 text-center md:text-left">
       <div class="space-y-2">
-        <span class="font-hand text-2xl text-terracotta block">Portfolio</span>
-        <h2 class="font-serif font-extrabold text-3xl md:text-4xl text-ink">
-          制作実績
+        <span class="font-hand text-2xl text-terracotta block">Case Studies</span>
+        <h2 class="font-serif font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink">
+          導入事例
         </h2>
       </div>
     </div>
 
     <!-- 実績カードグリッド -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16" id="gallery-grid">
+    <div class={worksWithImages.length === 1 ? "max-w-2xl mx-auto" : "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16"} id="gallery-grid">
       {worksWithImages.map((work, index) => {
         return (
           <div 
@@ -39,67 +44,135 @@ const worksWithImages = await Promise.all(
             data-category={work.category}
             data-index={index}
           >
-            <!-- PCモックアップエリア -->
-            <div class="relative w-full bg-ink/5 border-2 border-ink rounded-lg shadow-[6px_6px_0px_#1c1c1c] overflow-hidden shrink-0">
-              <!-- ブラウザ風ヘッダー -->
-              <div class="h-8 border-b-2 border-ink bg-paper flex items-center px-4 gap-1.5 shrink-0 select-none">
-                <div class="flex gap-1">
-                  <div class="w-2.5 h-2.5 rounded-full bg-ink/30"></div>
-                  <div class="w-2.5 h-2.5 rounded-full bg-ink/30"></div>
-                  <div class="w-2.5 h-2.5 rounded-full bg-ink/30"></div>
-                </div>
-                <div class="mx-auto bg-ink/5 text-[10px] text-ink-light py-0.5 px-6 sm:px-12 rounded border border-ink/10 truncate max-w-[60%] font-mono">
-                  {work.url}
-                </div>
-              </div>
-              
-              <!-- PCスクリーンショットエリア（ファーストビュー比率 16:9 を再現） -->
-              <div class="relative w-full aspect-video overflow-hidden bg-ink/5">
-                {work.image ? (
-                  <img 
-                    src={work.image.src} 
-                    alt={`${work.title} プレビュー`}
-                    width="640"
-                    height="360"
-                    class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-102"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                ) : (
-                  <div class="w-full h-full bg-ink/10 flex items-center justify-center text-xs text-ink-light">
-                    No Image
+            <!-- PC＆スマホ モックアップコンテナ -->
+            <div class="relative w-full pb-4 pr-3 sm:pb-5 sm:pr-4">
+              <!-- PCブラウザモックアップ -->
+              <div class="relative w-full bg-ink/5 border-2 border-ink rounded-lg shadow-[6px_6px_0px_#1c1c1c] overflow-hidden shrink-0 bg-paper">
+                <!-- ブラウザ風ヘッダー -->
+                <div class="h-8 border-b-2 border-ink bg-paper flex items-center px-4 gap-1.5 shrink-0 select-none">
+                  <div class="flex gap-1">
+                    <div class="w-2.5 h-2.5 rounded-full bg-ink/30"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-ink/30"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-ink/30"></div>
                   </div>
-                )}
+                  <div class="mx-auto bg-ink/5 text-[10px] text-ink-light py-0.5 px-4 sm:px-10 rounded border border-ink/10 truncate max-w-[60%] font-mono">
+                    {work.url}
+                  </div>
+                </div>
                 
-                <!-- URLへの直接ホバー導線 -->
-                <a 
-                  href={work.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  class="absolute inset-0 bg-ink/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300 backdrop-blur-xs"
-                  aria-label={`${work.title}のデモサイトを見る`}
-                >
-                  <span class="bg-paper text-ink font-sans font-bold text-xs sm:text-sm px-4 py-2 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none">
-                    サイトを見る <span class="inline-block ml-1 font-mono">→</span>
-                  </span>
-                </a>
+                <!-- PCスクリーンショットエリア（ファーストビュー比率 16:9 を再現） -->
+                <div class="relative w-full aspect-video overflow-hidden bg-ink/5">
+                  {work.image ? (
+                    <img 
+                      src={work.image.src} 
+                      alt={`${work.title} PC版プレビュー`}
+                      width="640"
+                      height="360"
+                      class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-102"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div class="w-full h-full bg-ink/10 flex items-center justify-center text-xs text-ink-light">
+                      No Image
+                    </div>
+                  )}
+                  
+                  <!-- URLへの直接ホバー導線 -->
+                  <a 
+                    href={work.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="absolute inset-0 bg-ink/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300 backdrop-blur-xs z-10"
+                    aria-label={`${work.title}のサイトを見る`}
+                  >
+                    <span class="bg-paper text-ink font-sans font-bold text-xs sm:text-sm px-4 py-2 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none">
+                      サイトを見る <span class="inline-block ml-1 font-mono">→</span>
+                    </span>
+                  </a>
+                </div>
               </div>
+
+              <!-- スマホ（モバイル版）モックアップ（右下に重ねて表示） -->
+              {work.mobileImage && (
+                <div class="absolute bottom-0 right-0 w-[28%] min-w-[100px] max-w-[155px] sm:max-w-[170px] z-20 transition-all duration-500 group-hover:-translate-y-2 group-hover:rotate-[-1deg]">
+                  <div class="relative bg-ink p-[3px] sm:p-[4px] border-2 border-ink rounded-[16px] sm:rounded-[20px] shadow-[5px_5px_0px_#1c1c1c] sm:shadow-[7px_7px_0px_#1c1c1c] overflow-hidden bg-paper">
+                    <!-- スマホ上部スピーカーバー / ノッチ -->
+                    <div class="absolute top-1.5 left-1/2 -translate-x-1/2 w-7 sm:w-9 h-1 bg-ink/30 rounded-full z-30 pointer-events-none"></div>
+                    
+                    <!-- スマホ画面（390:844 実機比率） -->
+                    <div class="relative w-full aspect-[390/844] rounded-[12px] sm:rounded-[15px] overflow-hidden bg-ink/10 border border-ink/20">
+                      <img 
+                        src={work.mobileImage.src} 
+                        alt={`${work.title} モバイル版プレビュー`}
+                        width="390"
+                        height="844"
+                        class="w-full h-full object-cover object-top"
+                        loading="lazy"
+                        decoding="async"
+                      />
+
+                      <!-- スマホ画面タップ導線 -->
+                      <a
+                        href={work.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="absolute inset-0 z-20"
+                        aria-label={`${work.title}のモバイルサイトを見る`}
+                      >
+                        <span class="sr-only">モバイルサイトを見る</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
-            <!-- サムネイル下部の店名と業種バッジ -->
-            <div class="px-0.5 flex flex-row items-center justify-between gap-x-4 gap-y-2 w-full">
-              <h3 class="font-serif font-extrabold text-base sm:text-lg text-ink">
-                {work.title}
-              </h3>
-              {work.category && (
-                <span class="inline-block px-2.5 py-0.5 border border-ink text-[10px] sm:text-[11px] font-sans font-bold tracking-widest bg-terracotta text-paper shadow-[2px_2px_0px_#1c1c1c] select-none shrink-0">
-                  {work.category}
-                </span>
-              )}
+            <!-- サムネイル下部：店名・業種（左）とサイトを見るボタン（右） -->
+            <div class="px-0.5 flex flex-row items-center justify-between gap-4 w-full">
+              <div class="flex flex-col gap-1.5 min-w-0">
+                {work.category && (
+                  <div>
+                    <span class="inline-block px-2.5 py-0.5 border border-ink text-[10px] sm:text-[11px] font-sans font-bold tracking-widest bg-terracotta text-paper shadow-[2px_2px_0px_#1c1c1c] select-none">
+                      {work.category}
+                    </span>
+                  </div>
+                )}
+                <h3 class="font-serif font-extrabold text-base sm:text-lg text-ink">
+                  {work.title}
+                </h3>
+              </div>
+
+              <a 
+                href={work.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 border-2 border-ink bg-paper text-ink font-sans font-bold text-xs sm:text-sm shadow-[3px_3px_0px_#1c1c1c] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none shrink-0"
+                aria-label={`${work.title}のサイトを見る`}
+              >
+                <span>サイトを見る</span>
+                <span class="font-mono text-xs">→</span>
+              </a>
             </div>
           </div>
         );
       })}
+    </div>
+
+    <!-- セクション下部：無料サンプルへのシンプルな導線 -->
+    <div class="mt-14 sm:mt-16 text-center space-y-3.5">
+      <p class="font-serif font-bold text-sm sm:text-base text-ink/85">
+        あなたのお店ならどんなサイトができるか、まずは無料で見てみませんか？
+      </p>
+      <div>
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2 px-7 sm:px-8 py-3.5 border-2 border-ink bg-terracotta text-paper font-serif font-bold text-xs sm:text-sm tracking-wider shadow-[3px_3px_0px_#1c1c1c] hover:bg-ink transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
+        >
+          <span>無料でサンプルサイトを作ってみる</span>
+          <span class="font-mono text-xs">→</span>
+        </a>
+      </div>
     </div>
 
   </div>

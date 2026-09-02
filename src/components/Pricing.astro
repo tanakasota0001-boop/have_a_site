@@ -1,195 +1,172 @@
 ---
-import { getCollection } from "astro:content";
-import siteData from "../data/site-data.json";
+// Pricing.astro (初期費用0円・月額8,800円の明朗会計 ＆ 6つの内包サポート)
+const guarantees = [
+  { label: "ホームページ制作", value: "0円" },
+  { label: "サンプル制作", value: "0円" },
+  { label: "契約期間の縛り", value: "なし" },
+];
 
-const pricingIncludes = await getCollection("pricing-includes");
-const sortedIncludes = pricingIncludes.sort(
-  (a, b) => a.data.sortOrder - b.data.sortOrder,
-);
+const features = [
+  {
+    title: "ホームページ制作",
+    description: "スマートフォンにも対応した、お店専用のオリジナルホームページを制作します。",
+  },
+  {
+    title: "ドメイン・サーバー・SSL",
+    description: "○○○.comなどの専用URL取得から、サーバー契約・セキュリティ設定まで一括管理します。",
+  },
+  {
+    title: "Googleビジネスプロフィール連携",
+    description: "Googleマップの店舗情報とホームページを連携。マップからのアクセスや集客力を高めます。",
+  },
+  {
+    title: "公開後の保守管理",
+    description: "技術的な管理や定期メンテナンス、万が一のトラブル対応もお任せください。",
+  },
+  {
+    title: "文章・写真の変更",
+    description: "営業時間や料金、写真など、軽微な変更や差し替えにも柔軟に対応します。",
+  },
+  {
+    title: "相談サポート",
+    description: "Webに詳しくなくても大丈夫。変更したい内容をそのままお気軽にお伝えください。",
+  },
+];
 ---
 
 <section
   id="pricing"
-  class="py-24 bg-paper border-b border-ink relative overflow-hidden paper-texture"
+  class="py-20 sm:py-24 bg-paper border-b border-ink relative overflow-hidden paper-texture"
 >
-  <div class="max-w-7xl mx-auto px-6 md:px-12">
+  <div class="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+    
     <!-- セクション見出し -->
-    <div class="text-center space-y-4 mb-20">
-      <span class="font-hand text-2xl text-terracotta block">Pricing</span>
+    <div class="text-center space-y-3 mb-14 sm:mb-16">
+      <span class="font-hand text-2xl text-terracotta block">Simple Pricing</span>
       <h2
-        class="font-serif font-extrabold text-3xl md:text-4xl text-ink leading-tight"
+        class="font-serif font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink leading-tight"
       >
-        費用について
+        ホームページに必要な費用は、これだけ。
       </h2>
-      <p
-        class="font-serif font-bold text-lg text-ink-light max-w-xl mx-auto leading-relaxed pt-2"
-      >
-        ホームページ制作に、費用はあまりかけられない。<br
-          class="hidden sm:inline"
-        />
-        そんな方こそ、ご相談ください。
+      <p class="text-ink-light text-xs sm:text-sm max-w-lg mx-auto leading-relaxed pt-1">
+        初期費用は0円。追加料金なしで、運営に必要なすべてが揃います。
       </p>
     </div>
 
-    <!-- 料金ブロック (雑誌の価格表・広告風のボールドデザイン) -->
+    <!-- 料金メインボックス (初期費用0円 ＆ 月額8,800円) -->
     <div
-      class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-stretch max-w-5xl mx-auto mb-16"
-      id="pricing-container"
+      class="max-w-4xl mx-auto border-2 border-ink bg-paper p-6 sm:p-8 md:p-10 shadow-[6px_6px_0px_#1c1c1c] rounded-xl relative mb-16 pricing-card"
+      id="pricing-main-card"
     >
-      <!-- 左：主要料金 (初期費用0円＆月額料金) (7カラム) -->
-      <div
-        class="lg:col-span-7 border-2 border-ink bg-paper p-6 sm:p-8 md:p-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-between relative pricing-card"
+      <!-- タグラベル -->
+      <span
+        class="absolute top-[-14px] left-6 font-serif font-bold text-xs tracking-wider px-3.5 py-1 border-2 border-ink bg-accent text-ink shadow-[2px_2px_0px_#1c1c1c] rounded-xs"
       >
-        <!-- バッジ -->
-        <span
-          class="absolute top-[-15px] left-6 font-serif font-bold text-xs tracking-wider px-3 py-1 border-2 border-ink bg-accent text-ink shadow-[2px_2px_0px_#1c1c1c]"
-        >
-          料金プラン
-        </span>
+        料金プラン
+      </span>
 
-        <div class="space-y-8 pt-4">
-          <!-- 初期費用0円 -->
-          <div
-            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-ink/10 pb-6"
-          >
-            <div class="space-y-1">
-              <h3 class="font-serif font-extrabold text-xl text-ink">
-                初期費用
-              </h3>
-              <p class="text-xs text-ink-light font-sans">
-                最初にまとまった費用をご用意いただく必要はありません。
-              </p>
-            </div>
-            <div class="flex items-baseline gap-0.5 shrink-0 whitespace-nowrap self-end sm:self-auto">
-              <span
-                class="font-serif font-extrabold text-6xl text-terracotta leading-none"
-                >0</span
-              >
-              <span class="font-serif font-bold text-2xl text-terracotta"
-                >円</span
-              >
-            </div>
-          </div>
-
-          <!-- 月額5,000円から -->
-          <div class="flex flex-col border-b border-ink/10 pb-6">
-            <div class="space-y-1">
-              <h3 class="font-serif font-extrabold text-xl text-ink">
-                月額料金
-              </h3>
-              <p class="text-xs text-ink-light font-sans">
-                サイトの内容や更新の頻度、サポート内容によって変わります。
-              </p>
-            </div>
-            <div class="flex flex-col items-end self-end mt-4">
-              <div
-                class="flex items-baseline gap-0.5 shrink-0 whitespace-nowrap"
-              >
-                <span
-                  class="font-serif font-extrabold text-5xl text-ink leading-none"
-                  >{siteData.pricing.basePrice}</span
-                >
-                <span class="font-serif font-bold text-xl text-ink">円〜</span>
-              </div>
-              <span class="font-serif font-bold text-xs text-ink-light mt-1"
-                >（税込）</span
-              >
-            </div>
+      <!-- 料金の2分割表示 (中央寄せ) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center pt-2 pb-8 border-b-2 border-ink/10">
+        <!-- 初期費用 -->
+        <div class="flex flex-col items-center text-center space-y-2">
+          <span class="text-xs sm:text-sm font-serif font-bold text-ink-light tracking-wide">初期費用・制作費</span>
+          <div class="flex items-baseline justify-center gap-1">
+            <span class="font-serif font-extrabold text-5xl sm:text-6xl text-terracotta leading-none">0</span>
+            <span class="font-serif font-bold text-2xl text-terracotta">円</span>
           </div>
         </div>
 
-        <div
-          class="mt-8 text-xs text-ink-light/80 bg-paper-texture p-4 border border-ink/10 font-sans leading-relaxed"
-        >
-          <strong>※料金に関するご確認事項：</strong><br />
-          {siteData.pricing.extraFeesClarification}
-        </div>
-
-        <!-- 最終CTAへの誘導 -->
-        <div class="mt-8">
-          <a
-            href="#contact"
-            class="block w-full text-center bg-ink text-paper font-serif font-bold text-xs tracking-widest py-4 hover:bg-terracotta hover:text-paper transition-colors duration-300 border border-ink"
-          >
-            ▶ あなたのケースでの料金を確認する
-          </a>
+        <!-- 月額費用 -->
+        <div class="flex flex-col items-center text-center space-y-2 border-t md:border-t-0 md:border-l border-ink/10 pt-6 md:pt-0 md:pl-6">
+          <span class="text-xs sm:text-sm font-serif font-bold text-ink-light tracking-wide">月額利用料金</span>
+          <div class="flex items-baseline justify-center gap-1">
+            <span class="font-serif font-extrabold text-5xl sm:text-6xl text-ink leading-none">8,800</span>
+            <span class="font-serif font-bold text-xl text-ink">円</span>
+            <span class="font-serif font-bold text-xs text-ink-light ml-1">（税込）</span>
+          </div>
         </div>
       </div>
 
-      <!-- 右カラム：吹き出し ＆ COLUMN (5カラム) -->
-      <div class="lg:col-span-5 flex flex-col justify-between gap-8 lg:gap-0">
-        <!-- 右上：月額料金に含まれるもの - 吹き出しデザイン (サイズをコンパクトにし、popな黄色背景へ、傾きなし) -->
-        <div
-          class="border-2 border-ink bg-[#FEF8E7] px-6 py-8 md:px-7 md:py-10 shadow-[6px_6px_0px_#1c1c1c] flex flex-col justify-start relative pricing-card
-          lg:before:content-[''] lg:before:absolute lg:before:z-10
-          lg:before:top-[178px] lg:before:left-0 lg:before:-translate-x-1/2 lg:before:w-4 lg:before:h-4 lg:before:bg-[#FEF8E7] lg:before:border-l-2 lg:before:border-b-2 lg:before:border-ink lg:before:rotate-45"
-        >
-          <div class="space-y-4">
-            <h3
-              class="font-serif font-extrabold text-lg text-ink border-b-2 border-ink pb-2"
-            >
-              月額に含まれる内容
-            </h3>
-            <p class="text-xs text-ink-light font-sans leading-relaxed">
-              ホームページの基本的な維持・更新に必要なすべてのサービスが、上記月額プランに内包されています。
-            </p>
-
-            <!-- 手書き風チェックマーク付きリスト -->
-            <ul class="space-y-2.5 pt-1">
-              {
-                sortedIncludes.map((item) => (
-                  <li class="flex items-center gap-3">
-                    <span class="w-5 h-5 rounded-full border border-ink flex items-center justify-center font-bold text-terracotta shrink-0 text-xs animate-pulse">
-                      ✓
-                    </span>
-                    <h4 class="font-serif font-bold text-sm text-ink">
-                      {item.data.title}
-                    </h4>
-                  </li>
-                ))
-              }
-            </ul>
+      <!-- 3つの安心保証 (縛りなし・0円リスト) -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-6">
+        {guarantees.map((item) => (
+          <div class="p-3.5 bg-[#F9F7F1] border border-ink/20 rounded-lg text-center shadow-[2px_2px_0px_rgba(28,28,28,0.08)]">
+            <div class="text-xs font-serif text-ink-light mb-1">{item.label}</div>
+            <div class="text-base sm:text-lg font-serif font-extrabold text-terracotta">{item.value}</div>
           </div>
-        </div>
-
-        <!-- 右下：なぜ、この価格で提供できるのか（コラム枠） -->
-        <div
-          class="p-6 border-2 border-dashed border-ink bg-paper relative shadow-[4px_4px_0px_#1c1c1c]"
-          id="why-pricing-box"
-        >
-          <div
-            class="absolute top-[-14px] left-6 bg-paper px-3 font-serif font-bold text-xs tracking-widest text-terracotta uppercase"
-          >
-            COLUMN
-          </div>
-
-          <div class="space-y-3 text-center md:text-left">
-            <h3 class="font-serif font-extrabold text-lg md:text-xl text-ink">
-              なぜ、この価格で提供できるのか
-            </h3>
-            <p
-              class="text-xs md:text-sm text-ink-light leading-relaxed font-sans"
-            >
-              小規模事業者向けにサービス内容を最適化し、制作から運用までを効率化することで、無理のない価格で提供しています。
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
+
+    <!-- 内包サポートセクション -->
+    <div class="max-w-5xl mx-auto pt-4" id="pricing-features-container">
+      <div class="text-center space-y-2 mb-10 sm:mb-12">
+        <h3 class="font-serif font-extrabold text-xl sm:text-2xl md:text-3xl text-ink">
+          ホームページに必要なもの、全部まとめてお任せください。
+        </h3>
+        <p class="text-xs sm:text-sm text-ink-light">
+          月額8,800円の中に、以下のサポートがすべて含まれています。
+        </p>
+      </div>
+
+      <!-- 6つのカードグリッド -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        {features.map((item, index) => (
+          <div class="p-5 sm:p-6 border-2 border-ink bg-paper rounded-lg shadow-[4px_4px_0px_#1c1c1c] flex flex-col justify-between hover:translate-y-[-2px] transition-transform duration-200 feature-card relative">
+            <div class="space-y-3">
+              <div class="flex items-center gap-2 border-b border-ink/10 pb-2.5">
+                <span class="w-6 h-6 rounded-full bg-accent border border-ink text-[11px] font-bold text-ink flex items-center justify-center shrink-0">
+                  {index + 1}
+                </span>
+                <h4 class="font-serif font-extrabold text-base sm:text-lg text-ink">
+                  {item.title}
+                </h4>
+              </div>
+              <p class="font-serif text-xs sm:text-sm text-ink/80 leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 安さの理由（小さなお店に必要な機能に特化） -->
+      <div class="mt-12 sm:mt-14 max-w-2xl mx-auto p-5 sm:p-6 border-2 border-dashed border-ink/30 bg-[#F9F7F1] rounded-lg text-center">
+        <span class="inline-block px-3 py-0.5 bg-accent/40 border border-ink text-xs font-serif font-bold text-ink rounded-xs mb-2">
+          安さの理由
+        </span>
+        <h4 class="font-serif font-extrabold text-base sm:text-lg text-ink mb-1.5">
+          「小さなお店に必要な機能」だけに特化しているから。
+        </h4>
+        <p class="font-serif text-xs sm:text-sm text-ink/80 leading-relaxed max-w-lg mx-auto">
+          大企業のような複雑なシステムや不要なページは作らず、個人店に必要な情報とサポートだけに絞り込んで最適化しているため、高品質なままこの価格でご提供できています。
+        </p>
+      </div>
+
+      <!-- CTAボタン -->
+      <div class="mt-8 text-center">
+        <a
+          href="#contact"
+          class="inline-block bg-terracotta text-paper font-serif font-bold text-sm sm:text-base tracking-wider px-8 py-4 hover:bg-ink hover:text-paper transition-all duration-300 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+        >
+          ▶ まずは無料でサンプルサイトを依頼する
+        </a>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <script>
   // GSAPによるスクロールフェードイン
-  const pricingContainer = document.getElementById("pricing-container");
-  const whyPricingBox = document.getElementById("why-pricing-box");
+  const pricingSection = document.getElementById("pricing");
 
-  if (pricingContainer) {
+  if (pricingSection) {
     const observer = new IntersectionObserver(
       async (entries) => {
         const entry = entries[0];
         if (entry.isIntersecting) {
-          observer.unobserve(pricingContainer);
+          observer.unobserve(pricingSection);
 
           try {
             const { default: gsap } = await import("gsap");
@@ -197,23 +174,21 @@ const sortedIncludes = pricingIncludes.sort(
             if (
               !window.matchMedia("(prefers-reduced-motion: reduce)").matches
             ) {
-              gsap.from(".pricing-card", {
+              gsap.from("#pricing-main-card", {
                 opacity: 0,
-                y: 50,
+                y: 40,
                 duration: 0.8,
-                stagger: 0.25,
                 ease: "power3.out",
               });
 
-              if (whyPricingBox) {
-                gsap.from(whyPricingBox, {
-                  opacity: 0,
-                  y: 30,
-                  duration: 1,
-                  delay: 0.5,
-                  ease: "power2.out",
-                });
-              }
+              gsap.from(".feature-card", {
+                opacity: 0,
+                y: 30,
+                duration: 0.6,
+                stagger: 0.12,
+                delay: 0.3,
+                ease: "power2.out",
+              });
             }
           } catch (error) {
             console.error("Failed to load GSAP in Pricing section:", error);
@@ -223,6 +198,6 @@ const sortedIncludes = pricingIncludes.sort(
       { rootMargin: "100px" },
     );
 
-    observer.observe(pricingContainer);
+    observer.observe(pricingSection);
   }
 </script>

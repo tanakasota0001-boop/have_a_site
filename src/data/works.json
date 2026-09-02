@@ -1,9 +1,18 @@
 [
   {
     "title": "株式会社エバーシャイン",
-    "url": "https://evershine-official.netlify.app/",
+    "url": "https://evershine.official--site.workers.dev/",
     "image": "/images/works/evershine.png",
+    "mobileImage": "/images/works/evershine-mobile.png",
     "category": "カーコーティング専門店",
     "sortOrder": 1
+  },
+  {
+    "title": "株式会社パイロットミュー",
+    "url": "https://www.pilotmieux.com/",
+    "image": "/images/works/pilotmieux.png",
+    "mobileImage": "/images/works/pilotmieux-mobile.png",
+    "category": "経営支援・AI/DX導入",
+    "sortOrder": 2
   }
 ]

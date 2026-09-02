@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="404 ページが見つかりませんでした | HaveASite" 
+  description="お探しのページは移動または削除された可能性があります。HaveASite（ハブアサイト）のトップページより目的のコンテンツをお探しください。"
+  noindex={true}
+>
+  <Header />
+
+  <main id="main-content" class="min-h-[75vh] flex items-center justify-center py-28 px-6 paper-texture">
+    <div class="max-w-xl w-full mx-auto text-center border-2 border-ink bg-paper p-8 sm:p-12 shadow-[6px_6px_0px_#1c1c1c] rounded-xl space-y-6">
+      
+      <!-- 404バッジ -->
+      <div class="inline-block px-4 py-1 border-2 border-ink bg-accent text-ink font-serif font-bold text-xs tracking-widest uppercase shadow-[2px_2px_0px_#1c1c1c] rotate-[-2deg]">
+        Page Not Found
+      </div>
+
+      <div class="space-y-2">
+        <h1 class="font-serif font-extrabold text-5xl sm:text-6xl text-terracotta leading-tight">
+          404
+        </h1>
+        <p class="font-serif font-bold text-xl sm:text-2xl text-ink">
+          ページが見つかりませんでした
+        </p>
+      </div>
+
+      <p class="font-sans text-sm text-ink-light leading-relaxed max-w-md mx-auto">
+        アクセスいただいたページは、URLが変更されたか、削除された可能性がございます。<br class="hidden sm:inline" />
+        お手数ですが、以下のボタンよりトップページへお戻りください。
+      </p>
+
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a 
+          href="/" 
+          class="w-full sm:w-auto inline-flex items-center justify-center bg-terracotta text-paper font-serif font-bold text-sm tracking-wider px-8 py-3.5 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+        >
+          ← トップページへ戻る
+        </a>
+        <a 
+          href="/#contact" 
+          class="w-full sm:w-auto inline-flex items-center justify-center bg-paper text-ink font-serif font-bold text-sm tracking-wider px-6 py-3.5 border-2 border-ink shadow-[3px_3px_0px_#1c1c1c] hover:bg-accent hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+        >
+          お問い合わせ・ご相談
+        </a>
+      </div>
+
+      <div class="pt-6 border-t border-ink/10">
+        <p class="text-xs text-ink-light font-sans mb-3">主なメニュー</p>
+        <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs font-serif text-ink">
+          <a href="/#problems" class="hover:text-terracotta underline">こんな方に</a>
+          <a href="/#system" class="hover:text-terracotta underline">仕組み</a>
+          <a href="/#pricing" class="hover:text-terracotta underline">料金プラン</a>
+          <a href="/#gallery" class="hover:text-terracotta underline">制作事例</a>
+          <a href="/#faq" class="hover:text-terracotta underline">よくある質問</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

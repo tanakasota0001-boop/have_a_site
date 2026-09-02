@@ -1,66 +1,73 @@
 ---
-const problems = [
+const targets = [
   {
-    id: "prob-1",
-    tag: "Q. 01",
-    text: "ホームページは欲しいけれど、何から始めればいいか全く分からない。",
+    id: "target-1",
+    tag: "01",
+    title: "SNSはあるけれど、「ちゃんとしたHP」がない",
+    description: "SNSでは、メニューや営業時間などの基本情報が埋もれがち。「ここなら安心」と思ってもらえる公式Webサイトを持ちたい方に。",
     rotation: "rotate-[-2deg]",
     bg: "bg-[#FEF08A] text-ink", // 付箋イエロー
   },
   {
-    id: "prob-2",
-    tag: "Q. 02",
-    text: "制作会社に依頼すると、高額な見積もりを出されそうで不安…。",
+    id: "target-2",
+    tag: "02",
+    title: "初期費用に何十万円もかけたくない",
+    description: "大企業のような豪華なサイトはいらない。メニュー・料金・アクセスなど、「お店の魅力と必要な情報」だけがシンプルに伝われば十分な方に。",
     rotation: "rotate-[3deg]",
     bg: "bg-[#FED7AA] text-ink", // 付箋オレンジ
   },
   {
-    id: "prob-3",
-    tag: "Q. 03",
-    text: "日々の仕事が忙しくて、ホームページの準備まで手が回らない！",
+    id: "target-3",
+    tag: "03",
+    title: "サーバーやドメイン…難しいことは全部任せたい",
+    description: "ITの専門用語が分からない、パソコン作業が苦手で過去に挫折した…。面倒な初期設定や公開後の管理も、すべてプロに丸投げしたい方に。",
     rotation: "rotate-[-1.5deg]",
     bg: "bg-[#BAE6FD] text-ink", // 付箋ブルー
   },
   {
-    id: "prob-4",
-    tag: "Q. 04",
-    text: "パソコンやWebのことが苦手。公開後の更新や管理ができるか心配。",
+    id: "target-4",
+    tag: "04",
+    title: "日々の営業で手一杯。準備に時間をかけられない",
+    description: "原稿の作成や長い打ち合わせは不要。スマホで写真と基本情報を送るだけで、制作から公開・その後の修正までお任せしたい方に。",
     rotation: "rotate-[2.5deg]",
     bg: "bg-[#E9D5FF] text-ink", // 付箋パープル
   },
 ];
 ---
 
-<section id="problems" class="py-24 bg-paper relative overflow-hidden paper-texture">
+<section id="problems" class="py-20 sm:py-24 bg-paper relative overflow-hidden paper-texture">
 
   <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
     
     <!-- セクション見出し -->
-    <div class="text-center space-y-4 mb-20">
-      <span class="font-hand text-2xl text-terracotta block">Troubles & Concerns</span>
-      <h2 class="font-serif font-extrabold text-3xl md:text-4xl text-ink leading-tight">
-        こんなお悩み、ありませんか？
+    <div class="text-center space-y-3 sm:space-y-4 mb-16 sm:mb-20">
+      <span class="font-hand text-2xl text-terracotta block">Who It's For</span>
+      <h2 class="font-serif font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink leading-tight">
+        こんなお店・事業者さんのためのサービスです
       </h2>
     </div>
 
     <!-- お悩みのグリッド (ノートに付箋を貼ったようなデザイン) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto" id="problems-grid">
-      {problems.map((prob) => (
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto" id="problems-grid">
+      {targets.map((item) => (
         <div 
-          class={`problem-sticky p-6 border-2 border-ink ${prob.bg} ${prob.rotation} shadow-[4px_4px_0px_#1c1c1c] transition-transform duration-300 hover:rotate-0 flex flex-col justify-between aspect-auto min-h-[160px] sm:aspect-[1.4/1] relative`}
-          id={prob.id}
+          class={`problem-sticky p-6 sm:p-7 border-2 border-ink ${item.bg} ${item.rotation} shadow-[4px_4px_0px_#1c1c1c] transition-transform duration-300 hover:rotate-0 flex flex-col justify-between min-h-[170px] relative`}
+          id={item.id}
         >
           <!-- 角のテープ風装飾（エディトリアル） -->
           <div class="absolute top-[-10px] left-1/2 -translate-x-1/2 w-12 h-5 bg-paper/60 border border-ink/20 rotate-[5deg] backdrop-blur-[2px]"></div>
 
           <div class="space-y-3">
-            <div class="flex items-center">
-              <span class="w-7 h-7 border-2 border-ink flex items-center justify-center text-lg font-extrabold text-terracotta bg-white rounded-[4px] shadow-[2px_2px_0px_#1c1c1c] transform -rotate-[4deg]">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 border-2 border-ink flex items-center justify-center text-sm font-extrabold text-terracotta bg-white rounded-[4px] shadow-[2px_2px_0px_#1c1c1c] transform -rotate-[4deg] shrink-0">
                 ✓
               </span>
+              <h3 class="font-serif font-extrabold text-base sm:text-lg text-ink leading-snug">
+                {item.title}
+              </h3>
             </div>
-            <p class="font-serif font-bold text-base md:text-lg text-ink leading-relaxed">
-              {prob.text}
+            <p class="font-serif text-sm sm:text-base text-ink/85 leading-relaxed pl-0.5">
+              {item.description}
             </p>
           </div>
 
@@ -69,9 +76,9 @@ const problems = [
     </div>
 
     <!-- 下部への導線 (解決へ) -->
-    <div class="mt-20 flex flex-col items-center justify-center text-center">
-      <p class="font-serif font-extrabold text-xl md:text-2xl text-ink tracking-wide">
-        <span class="marker-highlight-terracotta px-3 py-1">そのお悩み、私たちに任せてください</span>
+    <div class="mt-16 sm:mt-20 flex flex-col items-center justify-center text-center px-4">
+      <p class="font-serif font-extrabold text-lg sm:text-xl md:text-2xl text-ink tracking-wide leading-relaxed">
+        <span class="marker-highlight-terracotta px-3 py-1">そんな小さなお店・事業者さんに合わせて作ったのがHaveASiteです。</span>
       </p>
     </div>
 

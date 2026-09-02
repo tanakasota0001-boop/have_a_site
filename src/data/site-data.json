@@ -1,8 +1,8 @@
 {
   "site": {
-    "title": "ホームページ無料サンプル相談 | 塩尻市・松本市のHP制作屋さん",
-    "description": "初期費用0円、月額5,000円から。ご契約前に動くホームページの無料サンプルを作成します。塩尻・松本エリアは対面相談も可能。制作も更新もほぼ丸投げでOKです。",
-    "url": "https://[YOUR_DOMAIN_PLACEHOLDER]"
+    "title": "契約前に実物を作るサブスク型ホームページ制作 | HaveASite（ハブアサイト）",
+    "description": "初期費用0円、月額8,800円（税込）。ご契約前に動くホームページの無料サンプルを作成します。全国対応（塩尻・松本エリアは対面相談も可能）。制作も更新もほぼ丸投げでOKです。",
+    "url": "https://have-a-site.com"
   },
   "contact": {
     "email": "have.a.site01@gmail.com",
@@ -29,13 +29,13 @@
     }
   },
   "pricing": {
-    "basePrice": "5,000",
+    "basePrice": "8,800",
     "currency": "円",
-    "extraFeesClarification": "更新有無やサイト構成によって月額料金が異なるため、詳細は相談後に案内いたします。"
+    "extraFeesClarification": "初期費用0円・月額8,800円（税込）で、サーバー・独自ドメイン・保守管理まで全て含まれます。"
   },
   "navigation": [
     {
-      "label": "お悩み",
+      "label": "こんな方に",
       "url": "#problems"
     },
     {
@@ -43,20 +43,12 @@
       "url": "#system"
     },
     {
-      "label": "選ばれる理由",
-      "url": "#reasons"
-    },
-    {
-      "label": "メリット",
-      "url": "#benefits"
-    },
-    {
-      "label": "流れ",
-      "url": "#flow"
-    },
-    {
       "label": "料金",
       "url": "#pricing"
+    },
+    {
+      "label": "事例",
+      "url": "#gallery"
     },
     {
       "label": "よくある質問",
