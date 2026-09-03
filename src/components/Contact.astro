@@ -42,12 +42,12 @@ import lineQrCode from "../assets/line-qr.png";
           </div>
 
           <!-- お名前 -->
-          <div class="space-y-2">
+          <div class="space-y-1.5">
             <label
               for="name"
               class="font-serif font-bold text-sm text-ink block"
             >
-              お名前 <span class="text-terracotta text-xs font-sans font-normal"
+              お名前 <span class="text-terracotta text-xs font-sans font-bold"
                 >（必須）</span
               >
             </label>
@@ -67,14 +67,14 @@ import lineQrCode from "../assets/line-qr.png";
             >
           </div>
 
-          <!-- 店名 -->
-          <div class="space-y-2">
+          <!-- 店名 / 事業者名 -->
+          <div class="space-y-1.5">
             <label
               for="shop-name"
               class="font-serif font-bold text-sm text-ink block"
             >
               店名 / 事業者名 <span
-                class="text-terracotta text-xs font-sans font-normal"
+                class="text-terracotta text-xs font-sans font-bold"
                 >（必須）</span
               >
             </label>
@@ -84,24 +84,71 @@ import lineQrCode from "../assets/line-qr.png";
               id="shop-name"
               required
               class="w-full bg-paper border-2 border-ink p-3 text-base focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
-              placeholder="○○カフェ"
+              placeholder="○○カフェ、株式会社○○ など"
               aria-required="true"
             />
             <span
               id="shop-name-error"
               class="text-xs text-terracotta hidden font-sans"
-              role="alert">店名を入力してください。</span
+              role="alert">店名・事業者名を入力してください。</span
             >
           </div>
 
+          <!-- 業種 -->
+          <div class="space-y-1.5">
+            <label
+              for="industry"
+              class="font-serif font-bold text-sm text-ink block"
+            >
+              業種 <span
+                class="text-terracotta text-xs font-sans font-bold"
+                >（必須）</span
+              >
+            </label>
+            <input
+              type="text"
+              name="industry"
+              id="industry"
+              required
+              class="w-full bg-paper border-2 border-ink p-3 text-base focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+              placeholder="カフェ、美容室、工務店 など"
+              aria-required="true"
+            />
+            <span
+              id="industry-error"
+              class="text-xs text-terracotta hidden font-sans"
+              role="alert">業種を入力してください。</span
+            >
+          </div>
+
+          <!-- Instagram / Googleマップ / SNSのURL（任意） -->
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <label
+                for="sns-url"
+                class="font-serif font-bold text-sm text-ink block"
+              >
+                Instagram / Googleマップ / SNSのURL
+              </label>
+              <span class="text-ink-light text-xs font-sans">（任意）</span>
+            </div>
+            <input
+              type="text"
+              name="sns-url"
+              id="sns-url"
+              class="w-full bg-paper border-2 border-ink p-3 text-base focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
+              placeholder="URLまたはアカウント名（あれば）"
+            />
+          </div>
+
           <!-- メールアドレス -->
-          <div class="space-y-2">
+          <div class="space-y-1.5">
             <label
               for="email"
               class="font-serif font-bold text-sm text-ink block"
             >
               メールアドレス <span
-                class="text-terracotta text-xs font-sans font-normal"
+                class="text-terracotta text-xs font-sans font-bold"
                 >（必須）</span
               >
             </label>
@@ -111,7 +158,7 @@ import lineQrCode from "../assets/line-qr.png";
               id="email"
               required
               class="w-full bg-paper border-2 border-ink p-3 text-base focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
-              placeholder="your@email.com"
+              placeholder="example@email.com"
               aria-required="true"
             />
             <span
@@ -121,34 +168,27 @@ import lineQrCode from "../assets/line-qr.png";
             >
           </div>
 
-          <!-- 相談内容 -->
-          <div class="space-y-2">
-            <label
-              for="message"
-              class="font-serif font-bold text-sm text-ink block"
-            >
-              ご相談内容 <span
-                class="text-terracotta text-xs font-sans font-normal"
-                >（必須）</span
+          <!-- その他ご希望（任意） -->
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <label
+                for="notes"
+                class="font-serif font-bold text-sm text-ink block"
               >
-            </label>
+                その他ご希望・ご質問
+              </label>
+              <span class="text-ink-light text-xs font-sans">（任意）</span>
+            </div>
             <textarea
-              name="message"
-              id="message"
-              rows="4"
-              required
+              name="notes"
+              id="notes"
+              rows="3"
               class="w-full bg-paper border-2 border-ink p-3 text-base focus:outline-none focus:ring-2 focus:ring-terracotta font-sans"
-              placeholder="例：「無料サンプルを作ってほしい（業種：カフェ、Instagram：@sample）」など、一言でも大丈夫です。その他ご質問や気になる点もご自由に入力してください。"
-              aria-required="true"></textarea>
-            <span
-              id="message-error"
-              class="text-xs text-terracotta hidden font-sans"
-              role="alert">ご相談内容を入力してください。</span
-            >
+              placeholder="ご要望やご質問があればご記入ください（空欄でもOK）"></textarea>
           </div>
 
           <!-- プライバシーポリシー同意 (中央寄せ) -->
-          <div class="space-y-2 text-center">
+          <div class="space-y-2 text-center pt-1">
             <label class="inline-flex items-center justify-center gap-2.5 cursor-pointer select-none">
               <input
                 type="checkbox"
@@ -181,9 +221,9 @@ import lineQrCode from "../assets/line-qr.png";
           <!-- 送信ボタン -->
           <button
             type="submit"
-            class="w-full max-w-[280px] mx-auto block text-center bg-terracotta text-paper font-serif font-bold text-sm tracking-widest py-3 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] hover:disabled:translate-x-0 hover:disabled:translate-y-0 hover:disabled:shadow-[4px_4px_0px_#1c1c1c] disabled:opacity-75 disabled:cursor-not-allowed transition-all duration-200"
+            class="w-full max-w-[320px] mx-auto block text-center bg-terracotta text-paper font-serif font-bold text-sm tracking-wider sm:tracking-widest py-3.5 border-2 border-ink shadow-[4px_4px_0px_#1c1c1c] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] hover:disabled:translate-x-0 hover:disabled:translate-y-0 hover:disabled:shadow-[4px_4px_0px_#1c1c1c] disabled:opacity-75 disabled:cursor-not-allowed transition-all duration-200"
           >
-            無料サンプルについて相談する
+            自分のお店の無料サンプルを作ってみる →
           </button>
         </form>
 
@@ -195,10 +235,10 @@ import lineQrCode from "../assets/line-qr.png";
             </svg>
           </div>
           <div class="space-y-2">
-            <h3 class="font-serif font-extrabold text-2xl text-ink">送信が完了しました</h3>
+            <h3 class="font-serif font-extrabold text-2xl text-ink">お申込みありがとうございます！</h3>
             <p class="font-serif font-bold text-sm text-ink-light leading-relaxed max-w-md mx-auto px-4">
-              お問い合わせいただき、誠にありがとうございます。<br />
-              ご入力いただいたメールアドレス宛に、自動返信または担当者より数日以内にご連絡いたします。
+              無料サンプルのお申込みを受け付けました。<br />
+              ご入力いただいた内容をもとに担当者がサンプルサイトを制作し、数日以内にご確認用URLをメールでお送りいたします。
             </p>
           </div>
           <button
@@ -206,7 +246,7 @@ import lineQrCode from "../assets/line-qr.png";
             type="button"
             class="text-xs font-serif font-bold text-ink underline hover:text-terracotta transition-colors"
           >
-            新しくメッセージを送信する
+            新しく申込みを送信する
           </button>
         </div>
 
@@ -291,8 +331,8 @@ import lineQrCode from "../assets/line-qr.png";
       // 各入力項目の検証
       const name = document.getElementById("name") as HTMLInputElement;
       const shopName = document.getElementById("shop-name") as HTMLInputElement;
+      const industry = document.getElementById("industry") as HTMLInputElement;
       const email = document.getElementById("email") as HTMLInputElement;
-      const message = document.getElementById("message") as HTMLTextAreaElement;
       const agree = document.getElementById("agree") as HTMLInputElement;
       const honeypot = document.getElementById("honeypot") as HTMLInputElement;
 
@@ -319,16 +359,16 @@ import lineQrCode from "../assets/line-qr.png";
         hasError = true;
       }
 
+      if (!industry.value.trim()) {
+        document.getElementById("industry-error")?.classList.remove("hidden");
+        if (!hasError) industry.focus();
+        hasError = true;
+      }
+
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!email.value.trim() || !emailRegex.test(email.value)) {
         document.getElementById("email-error")?.classList.remove("hidden");
         if (!hasError) email.focus();
-        hasError = true;
-      }
-
-      if (!message.value.trim()) {
-        document.getElementById("message-error")?.classList.remove("hidden");
-        if (!hasError) message.focus();
         hasError = true;
       }
 
@@ -399,7 +439,7 @@ import lineQrCode from "../assets/line-qr.png";
         if (submitError) submitError.classList.remove("hidden");
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = "無料サンプルについて相談する";
+          submitBtn.textContent = "自分のお店の無料サンプルを作ってみる →";
         }
       }
     });
@@ -421,7 +461,7 @@ import lineQrCode from "../assets/line-qr.png";
             form.reset();
             if (submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.textContent = "無料サンプルについて相談する";
+              submitBtn.textContent = "自分のお店の無料サンプルを作ってみる →";
             }
 
             const elementsToShow = [form, divider, lineArea].filter(Boolean) as HTMLElement[];
@@ -445,7 +485,7 @@ import lineQrCode from "../assets/line-qr.png";
         form.reset();
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = "無料サンプルについて相談する";
+          submitBtn.textContent = "自分のお店の無料サンプルを作ってみる →";
         }
         [form, divider, lineArea].filter(Boolean).forEach(el => {
           el!.classList.remove("hidden");
@@ -454,6 +494,8 @@ import lineQrCode from "../assets/line-qr.png";
       }
     });
   }
+
+
 
   // GSAPによるスクロールフェードイン
   const contactContainer = document.getElementById("contact-container");

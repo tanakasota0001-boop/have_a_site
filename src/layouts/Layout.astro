@@ -41,7 +41,7 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "HaveASite",
-  "alternateName": "HaveASite",
+  "alternateName": ["HaveASite", "ハブアサイト"],
   "description": description,
   "url": siteOrigin,
   "logo": `${siteOrigin}/assets/logo.png`,
@@ -51,6 +51,22 @@ const serviceSchema = {
   "priceRange": "¥8800",
   "currenciesAccepted": "JPY",
   "paymentAccepted": "クレジットカード, 銀行振込",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": siteData.company.phone,
+      "contactType": "customer service",
+      "availableLanguage": "Japanese",
+      "areaServed": "JP"
+    },
+    {
+      "@type": "ContactPoint",
+      "email": siteData.contact.email,
+      "contactType": "sales",
+      "availableLanguage": "Japanese",
+      "areaServed": "JP"
+    }
+  ],
   "knowsAbout": [
     "ホームページ制作",
     "サブスク型ホームページ制作",
@@ -78,10 +94,44 @@ const serviceSchema = {
       "name": "長野県"
     },
     {
+      "@type": "AdministrativeArea",
+      "name": "塩尻市"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "松本市"
+    },
+    {
       "@type": "Country",
       "name": "JP"
     }
   ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "HaveASite 提供サービス一覧",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "動く無料サンプルサイト制作",
+          "description": "ご契約前にあなたのお店専用のホームページ無料サンプルを作成します。"
+        },
+        "price": "0",
+        "priceCurrency": "JPY"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "サブスク型ホームページ制作・保守管理プラン",
+          "description": "初期費用0円・月額8,800円（税込）でドメイン・サーバー・SSL・定期更新サポートまで一括管理。"
+        },
+        "price": siteData.pricing.basePrice.replace(/,/g, ''),
+        "priceCurrency": "JPY"
+      }
+    ]
+  },
   "offers": {
     "@type": "Offer",
     "price": siteData.pricing.basePrice.replace(/,/g, ''),
@@ -125,11 +175,13 @@ if (schema) {
     <!-- SEO 基本メタタグ -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="HaveASite" />
     <link rel="canonical" href={canonicalHref} />
     <meta 
       name="robots" 
       content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} 
     />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     
     <!-- OGP (Open Graph Protocol) -->
@@ -146,6 +198,8 @@ if (schema) {
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@have_a_site" />
+    <meta name="twitter:creator" content="@have_a_site" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageHref} />
